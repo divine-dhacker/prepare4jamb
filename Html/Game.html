@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prepare4JAMB</title>
+    <link rel="shortcut icon" href="../assets/images/Favicon/favicon.png" type="image/png">
+    <link rel="stylesheet" href="../CSS/Game/Game.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <nav>
+        <div class="flex">
+            <div class="logo">
+                <h2>
+                    Prepare4JAMB
+                </h2>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../Html/Read.html">Read</a></li>
+            <li><a href="../Html/Resources.html">Resources</a></li>
+            <li><a href="../Html/Game.html">Games</a></li>
+        </ul>
+    </nav>
+    <!-- Header Close -->
+
+
+
+    <section class="game-container">
+        <div class="game-container">
+            <div class="word-container">
+                <!-- Each letter container is empty at the start -->
+                <div class="letter" id="letter1"></div>
+                <div class="letter" id="letter2"></div>
+                <div class="letter" id="letter3"></div>
+                <div class="letter" id="letter4"></div>
+                <!-- Add more containers if needed for longer words -->
+            </div>
+
+            <div class="letter-buttons">
+                <!-- Letter buttons for spelling -->
+                <button class="letter-button">C</button>
+                <button class="letter-button">O</button>
+                <button class="letter-button">D</button>
+                <button class="letter-button">E</button>
+                <!-- Add more buttons for other letters -->
+            </div>
+
+            <div class="controls">
+                <!-- Mic icon for starting the game -->
+                <div class="mic-icon">&#127908;</div>
+
+                <!-- Result message -->
+                <p id="resultText"></p>
+
+                <!-- Submit and Try Again buttons -->
+                <button id="submitBtn" class="action-btn">Submit</button>
+                <button id="tryAgainBtn" class="action-btn">Try Again</button>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="quiz-section">
+        <h2>Test Your Knowledge</h2>
+        <p>Try our quick quiz to assess your readiness!</p>
+        <div id="quiz-container">
+            <div class="quiz-question">
+                <p>What is the derivative of x²?</p>
+                <div class="options">
+                    <button>A. 2x</button>
+                    <button>B. x²</button>
+                    <button>C. 2</button>
+                    <button>D. None</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <p style="font-size: 14px; color: #bbb; ">This page is short. Go back to the homepage:</p>
+        <a href="../index.html"
+            style="display: inline-block; padding: 8px 16px; background: #4CAF50; color: white; text-decoration: none; border-radius: 8px; margin-bottom: 12px;">Home</a>
+    </div>
+
+
+    <div
+        style="text-align: center; padding: 20px; font-size: 18px; background-color: #f1f1f1; color: #333; border-top: 2px solid #ccc;">
+        No More Content
+    </div>
+
+
+    <footer
+        style="text-align: center; padding: 30px; font-size: 16px; background-color: #333; color: #fff; border-top: 3px solid #4CAF50;">
+        <p style="margin: 0;">Website Built with Passion by <strong style="color: #4CAF50;">[Nosakhare Divine]</strong>
+        </p>
+        <small style="font-size: 14px; color: #bbb;">© 2025 All rights reserved.</small>
+    </footer>
+
+
+
+    <script src="../JavaScript/home.js"></script>
+    <script src="../JavaScript/game.js"></script>
+
+</body>
+
+</html>

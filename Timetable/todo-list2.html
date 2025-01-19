@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic To-Do List</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+      body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.todo-container {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+}
+
+h1 {
+  color: #333;
+}
+
+.input-area {
+  margin-bottom: 20px;
+}
+
+#task-input {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#add-task-btn {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#add-task-btn:hover {
+  background-color: #0056b3;
+}
+
+#task-list {
+  list-style: none;
+  padding: 0;
+}
+
+#task-list li {
+  background: #f9f9f9;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #a71d2a;
+}
+  </style>
+</head>
+<body>
+  <div class="todo-container">
+    <h1>To-Do List</h1>
+    <div class="input-area">
+      <input type="text" id="task-input" placeholder="Enter a task">
+      <button id="add-task-btn">Add Task</button>
+    </div>
+    <ul id="task-list"></ul>
+  </div>
+  <script>
+   // Select elements
+const taskInput = document.getElementById('task-input');
+const addTaskBtn = document.getElementById('add-task-btn');
+const taskList = document.getElementById('task-list');
+
+// Load tasks from local storage
+const loadTasks = () => {
+  const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  tasks.forEach(task => addTaskToList(task));
+};
+
+// Add task to list
+const addTaskToList = (task) => {
+  const listItem = document.createElement('li');
+  listItem.innerHTML = `${task} <button class="delete-btn">Delete</button>`;
+  listItem.querySelector('.delete-btn').addEventListener('click', () => {
+    removeTask(task, listItem);
+  });
+  taskList.appendChild(listItem);
+};
+
+// Add task functionality
+addTaskBtn.addEventListener('click', () => {
+  const task = taskInput.value.trim();
+  if (task !== '') {
+    addTaskToList(task); // Add to UI
+    saveTask(task); // Save to local storage
+    taskInput.value = ''; // Clear input
+  }
+});
+
+// Save task to local storage
+const saveTask = (task) => {
+  const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  tasks.push(task);
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+};
+
+// Remove task from list and local storage
+const removeTask = (task, listItem) => {
+  const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  const updatedTasks = tasks.filter(t => t !== task);
+  localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  taskList.removeChild(listItem);
+};
+
+// Initialize
+loadTasks();
+  </script>
+</body>
+</html>

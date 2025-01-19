@@ -1,0 +1,67 @@
+/* General Styles for Resources Section */
+.resources-section {
+    padding: 50px 20px;
+    background: #f4f7fc;
+    text-align: center;
+    color: #333;
+}
+
+.resources-section h1 {
+    font-size: 36px;
+    color: #4caf50;
+    margin-bottom: 20px;
+}
+
+.resources-section p {
+    font-size: 18px;
+    margin-bottom: 40px;
+    color: #555;
+}
+
+.resources-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Resource Card Styling */
+.resource-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.resource-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.resource-card h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.resource-card p {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.download-btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.download-btn:hover {
+    background-color: #45a049;
+}

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prepare4JAMB</title>
+    <link rel="shortcut icon" href="../assets/images/Favicon/favicon.png" type="image/png">
+    <!-- <link rel="stylesheet" href="../CSS/Game/Game.css"> -->
+    <style>
+        body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.game-container {
+  width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: rgba(0, 255, 0, 0.137);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.mic-icon {
+  font-size: 24px;
+  background-color: transparent;
+  border: none;
+  color: #444;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.mic-icon:hover {
+  background-color: rgba(0, 255, 0, 0.2);
+}
+
+h2 {
+  font-size: 24px;
+  color: #444;
+  text-align: center;
+}
+
+.word-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.letter {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #444;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.word-list {
+  text-align: center;
+}
+
+.letter {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #444;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    border-radius: 4px;
+}
+
+.letter-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.letter-button {
+    padding: 10px;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.letter-button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mic-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.action-btn {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.action-btn:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+#resultText {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .game-container {
+    width: 90%;
+  }
+
+  .letter {
+    width: 40px;
+    height: 40px;
+  }
+
+  .letter-button {
+    width: 30px;
+    height: 30px;
+  }
+}
+    </style>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <nav>
+      <div class="flex">
+        <div class="logo">
+            <h2>
+                Prepare4JAMB
+            </h2>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+      </div>
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../Html/Read.html">Read</a></li>
+            <li><a href="../Html/Videos.html">Videos</a></li>
+            <li><a href="../Html/Game.html">Games</a></li>
+        </ul>
+    </nav>
+    <!-- Header Close -->
+    
+    
+    
+    <section class="game-container">
+ <div class="game-container">
+    <div class="word-container">
+        <!-- Each letter container is empty at the start -->
+        <div class="letter" id="letter1"></div>
+        <div class="letter" id="letter2"></div>
+        <div class="letter" id="letter3"></div>
+        <div class="letter" id="letter4"></div>
+        <!-- Add more containers if needed for longer words -->
+    </div>
+
+    <div class="letter-buttons">
+        <!-- Letter buttons for spelling -->
+        <button class="letter-button">C</button>
+        <button class="letter-button">O</button>
+        <button class="letter-button">D</button>
+        <button class="letter-button">E</button>
+        <!-- Add more buttons for other letters -->
+    </div>
+
+    <div class="controls">
+        <!-- Mic icon for starting the game -->
+        <div class="mic-icon">&#127908;</div>
+
+        <!-- Result message -->
+        <p id="resultText"></p>
+
+        <!-- Submit and Try Again buttons -->
+        <button id="submitBtn" class="action-btn">Submit</button>
+        <button id="tryAgainBtn" class="action-btn">Try Again</button>
+    </div>
+</div>
+</section>
+    
+    
+    
+<script src="../JavaScript/home.js"></script>
+<script>
+  // Sample word for the game
+const wordToSpell = "CODE"; // You can change this to any word you want to test
+
+// Function to start the game (triggered by clicking the mic icon)
+function startGame() {
+  // Use Speech Synthesis to speak the word aloud
+  const msg = new SpeechSynthesisUtterance(`Spell the word: ${wordToSpell}`);
+  window.speechSynthesis.speak(msg);
+
+  // Set up the game by placing the letters in the right positions
+  let letters = wordToSpell.split("");
+  
+  // Reset the game before starting
+  resetGame();
+  
+  // Show the letters in their respective spots
+  letters.forEach((letter, index) => {
+    const letterBox = document.getElementById(`letter${index + 1}`);
+    letterBox.setAttribute("data-letter", letter); // Store the correct letter
+  });
+
+  // Enable the Submit button
+  document.getElementById("submitBtn").disabled = false;
+}
+
+// Function to reset the game
+function resetGame() {
+  const letterContainers = document.querySelectorAll(".letter");
+  letterContainers.forEach(container => {
+    container.textContent = '';  // Clear any letter from the container
+  });
+
+  // Enable all letter buttons for the next round
+  const letterButtons = document.querySelectorAll(".letter-button");
+  letterButtons.forEach(button => {
+    button.disabled = false;
+    button.style.backgroundColor = '#444';  // Reset button color
+  });
+
+  // Reset the result text (no longer necessary since we're using voice)
+  // const resultText = document.getElementById("resultText");
+  // resultText.textContent = '';
+}
+
+// Function to handle clicking on the letter buttons
+function handleLetterClick(button) {
+  const clickedLetter = button.textContent; // Get the letter from the button
+  const emptySlots = document.querySelectorAll(".letter:not(:empty)"); // Find empty letter containers
+  
+  if (emptySlots.length < wordToSpell.length) {
+    for (let i = 0; i < wordToSpell.length; i++) {
+      const letterContainer = document.getElementById(`letter${i + 1}`);
+      
+      if (!letterContainer.textContent) {
+        letterContainer.textContent = clickedLetter;
+        button.disabled = true;  // Disable the button once used
+        button.style.backgroundColor = '#ddd';  // Change the button color
+
+        break; // Break after adding the letter
+      }
+    }
+  }
+}
+
+// Function to check if the word is correctly spelled
+function checkWord() {
+  const letterContainers = document.querySelectorAll(".letter");
+  const wordArray = Array.from(wordToSpell);
+
+  let correct = true;
+
+  letterContainers.forEach((container, index) => {
+    if (container.textContent !== wordArray[index]) {
+      correct = false;  // If any letter is wrong, set correct to false
+    }
+  });
+
+  // Speak the result using Speech Synthesis after clicking submit
+  const resultMsg = new SpeechSynthesisUtterance(correct ? 'Congratulations! You spelled the word correctly!' : 'Oops! Try again!');
+  resultMsg.pitch = 1;  // Adjust pitch if needed
+  resultMsg.rate = 1;  // Adjust rate if needed
+  window.speechSynthesis.speak(resultMsg);  // Speak the message
+}
+
+// Function to handle the Submit button
+function submitWord() {
+  checkWord(); // Check if the word is correct after submitting
+}
+
+// Function to handle the Try Again button
+function tryAgain() {
+  resetGame(); // Reset the game for another attempt
+}
+
+// Add event listeners for the letter buttons
+document.querySelectorAll(".letter-button").forEach(button => {
+  button.addEventListener("click", () => handleLetterClick(button));
+});
+
+// Add event listener to the mic icon to start the game
+document.querySelector(".mic-icon").addEventListener("click", startGame);
+
+// Add event listener to the Submit button
+document.getElementById("submitBtn").addEventListener("click", submitWord);
+
+// Add event listener to the Try Again button
+document.getElementById("tryAgainBtn").addEventListener("click", tryAgain);
+</script>
+
+</body>
+
+</html>

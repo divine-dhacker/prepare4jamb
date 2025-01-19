@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prepare4JAMB</title>
+    <link rel="shortcut icon" href="../assets/images/Favicon/favicon.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <nav>
+        <div class="flex">
+            <div class="logo">
+                <h2>
+                    Prepare4JAMB
+                </h2>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="./Html/Read.html">Read</a></li>
+            <li><a href="./Html/Resources.html">Resources</a></li>
+            <li><a href="./Html/Game.html">Games</a></li>
+        </ul>
+    </nav>
+    <!-- Header Close -->
+
+
+    <!-- Timer -->
+
+    <section class="countdown-section">
+        <h2>Countdown to JAMB Exam</h2>
+        <div class="countdown-timer">
+            <div class="time-box">
+                <span id="months">00</span>
+                <p>Months</p>
+            </div>
+            <div class="time-box">
+                <span id="weeks">00</span>
+                <p>Weeks</p>
+            </div>
+            <div class="time-box">
+                <span id="days">00</span>
+                <p>Days</p>
+            </div>
+            <div class="time-box">
+                <span id="hours">00</span>
+                <p>Hours</p>
+            </div>
+            <div class="time-box">
+                <span id="minutes">00</span>
+                <p>Minutes</p>
+            </div>
+            <div class="time-box">
+                <span id="seconds">00</span>
+                <p>Seconds</p>
+            </div>
+        </div>
+
+        <div class="calendar-container">
+            <h3>JAMB Preparation Calendar</h3>
+            <div class="month" id="january">
+                <h4>January</h4>
+                <div class="days"></div>
+            </div>
+            <div class="month" id="february">
+                <h4>February</h4>
+                <div class="days"></div>
+            </div>
+            <div class="month" id="march">
+                <h4>March</h4>
+                <div class="days"></div>
+            </div>
+            <div class="month" id="april">
+                <h4>April</h4>
+                <div class="days"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Timer Close -->
+
+
+    <!-- Header -->
+    <section class="timetable">
+
+        </h1>
+        <p>Please select your four subjects based on your path (e.g., Physical Science offers Mathematics, while
+            Biological Science does not).</p>
+        <div class="container">
+            <div id="form-section">
+                <div class="form-group">
+                    <label for="subject1">Subject 1 (Highest Priority):</label>
+                    <select id="subject1">
+                        <option value="" disabled selected>Select a subject</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="English">English</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Biology">Biology</option>
+                        <option value="Chemistry">Chemistry</option>
+                        <option value="Economics">Economics</option>
+                        <option value="Geography">Geography</option>
+                        <option value="Government">Government</option>
+                        <option value="Literature in English">Literature in English</option>
+                        <option value="Agricultural Science">Agricultural Science</option>
+                        <option value="Commerce">Commerce</option>
+                        <option value="Christian Religious Knowledge">Christian Religious Knowledge</option>
+                        <option value="Islamic Studies">Islamic Studies</option>
+                        <option value="History">History</option>
+                        <option value="Civic Education">Civic Education</option>
+                        <option value="French">French</option>
+                        <option value="Igbo">Igbo</option>
+                        <option value="Yoruba">Yoruba</option>
+                        <option value="Hausa">Hausa</option>
+                        <option value="Fine Arts">Fine Arts</option>
+                        <option value="Music">Music</option>
+                        <option value="Arabic">Arabic</option>
+                        <option value="Home Economics">Home Economics</option>
+                        <option value="Technical Drawing">Technical Drawing</option>
+                        <option value="Computer Studies">Computer Studies</option>
+                        <option value="Physical Education">Physical Education</option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="subject2">Subject 2:</label>
+                    <select id="subject2">
+                        <option value="" disabled selected>Select a subject</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="English">English</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Biology">Biology</option>
+                        <option value="Chemistry">Chemistry</option>
+                        <option value="Economics">Economics</option>
+                        <option value="Geography">Geography</option>
+                        <option value="Government">Government</option>
+                        <option value="Literature in English">Literature in English</option>
+                        <option value="Agricultural Science">Agricultural Science</option>
+                        <option value="Commerce">Commerce</option>
+                        <option value="Christian Religious Knowledge">Christian Religious Knowledge</option>
+                        <option value="Islamic Studies">Islamic Studies</option>
+                        <option value="History">History</option>
+                        <option value="Civic Education">Civic Education</option>
+                        <option value="French">French</option>
+                        <option value="Igbo">Igbo</option>
+                        <option value="Yoruba">Yoruba</option>
+                        <option value="Hausa">Hausa</option>
+                        <option value="Fine Arts">Fine Arts</option>
+                        <option value="Music">Music</option>
+                        <option value="Arabic">Arabic</option>
+                        <option value="Home Economics">Home Economics</option>
+                        <option value="Technical Drawing">Technical Drawing</option>
+                        <option value="Computer Studies">Computer Studies</option>
+                        <option value="Physical Education">Physical Education</option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="subject3">Subject 3:</label>
+                    <select id="subject3">
+                        <option value="" disabled selected>Select a subject</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="English">English</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Biology">Biology</option>
+                        <option value="Chemistry">Chemistry</option>
+                        <option value="Economics">Economics</option>
+                        <option value="Geography">Geography</option>
+                        <option value="Government">Government</option>
+                        <option value="Literature in English">Literature in English</option>
+                        <option value="Agricultural Science">Agricultural Science</option>
+                        <option value="Commerce">Commerce</option>
+                        <option value="Christian Religious Knowledge">Christian Religious Knowledge</option>
+                        <option value="Islamic Studies">Islamic Studies</option>
+                        <option value="History">History</option>
+                        <option value="Civic Education">Civic Education</option>
+                        <option value="French">French</option>
+                        <option value="Igbo">Igbo</option>
+                        <option value="Yoruba">Yoruba</option>
+                        <option value="Hausa">Hausa</option>
+                        <option value="Fine Arts">Fine Arts</option>
+                        <option value="Music">Music</option>
+                        <option value="Arabic">Arabic</option>
+                        <option value="Home Economics">Home Economics</option>
+                        <option value="Technical Drawing">Technical Drawing</option>
+                        <option value="Computer Studies">Computer Studies</option>
+                        <option value="Physical Education">Physical Education</option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="subject4">Subject 4 (Lowest Priority):</label>
+                    <select id="subject4">
+                        <option value="" disabled selected>Select a subject</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="English">English</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Biology">Biology</option>
+                        <option value="Chemistry">Chemistry</option>
+                        <option value="Economics">Economics</option>
+                        <option value="Geography">Geography</option>
+                        <option value="Government">Government</option>
+                        <option value="Literature in English">Literature in English</option>
+                        <option value="Agricultural Science">Agricultural Science</option>
+                        <option value="Commerce">Commerce</option>
+                        <option value="Christian Religious Knowledge">Christian Religious Knowledge</option>
+                        <option value="Islamic Studies">Islamic Studies</option>
+                        <option value="History">History</option>
+                        <option value="Civic Education">Civic Education</option>
+                        <option value="French">French</option>
+                        <option value="Igbo">Igbo</option>
+                        <option value="Yoruba">Yoruba</option>
+                        <option value="Hausa">Hausa</option>
+                        <option value="Fine Arts">Fine Arts</option>
+                        <option value="Music">Music</option>
+                        <option value="Arabic">Arabic</option>
+                        <option value="Home Economics">Home Economics</option>
+                        <option value="Technical Drawing">Technical Drawing</option>
+                        <option value="Computer Studies">Computer Studies</option>
+                        <option value="Physical Education">Physical Education</option>
+
+                    </select>
+                </div>
+                <button id="generate-table">Create Table</button>
+            </div>
+            <div id="table-section" class="hidden">
+                <h2>Your Weekly Timetable</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Subject</th>
+                        </tr>
+                    </thead>
+                    <tbody id="timetable-body"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Buttons to redo or change choices -->
+        <div id="action-buttons" class="hidden">
+            <div style="display: flex; gap: 12px;">
+                <button id="redo-timetable">Redo Timetable</button>
+                <button id="change-choices">Change Choices</button>
+            </div>
+        </div>
+    </section>
+    <!-- Header Close -->
+
+
+    <!-- || RESOURCES -->
+
+    <section class="resources-section">
+        <h2>Essential Study Resources</h2>
+        <p>Download study materials, past questions, and guides to ace your JAMB exams!</p>
+        <div class="resources-container">
+            <div class="resource-card">
+                <h3>Mathematics Guide</h3>
+                <a href="./assets/Resources/Mathematics.pdf" download>Download</a>
+            </div>
+            <div class="resource-card">
+                <h3>English Practice</h3>
+                <a href="./assets/Resources/Use-of-English.pdf" download>Download</a>
+            </div>
+            <div class="resource-card">
+                <h3>Life Changer Novel</h3>
+                <a href="./assets/Resources/LifeChanger.pdf" download>Download</a>
+            </div>
+            <div class="resource-card">
+                <h3>Download More</h3>
+                <a href="./Html/Resources.html">Resource Page</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- || RESOURCES END -->
+
+
+
+    <!-- Career Guide -->
+
+    <section class="career-guide">
+        <div class="container">
+            <h2 class="section-title">Career Guide: Explore Your Future Path</h2>
+            <p class="intro-text">Choosing a career path is a significant decision that shapes your future. As you
+                prepare for the JAMB exam and beyond, here's a quick guide to help you explore potential careers,
+                what they can offer, and the aggregate requirements for top Nigerian universities.</p>
+
+            <div class="career-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Career Path</th>
+                            <th>Salary Range</th>
+                            <th>Career Growth</th>
+                            <th>Aggregate Score (Federal Universities)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Medicine</td>
+                            <td class="high">₦2,000,000 - ₦10,000,000+</td>
+                            <td class="high">High</td>
+                            <td>
+                                <ul>
+                                    <li>University of Lagos (UNILAG): 80%+</li>
+                                    <li>University of Ibadan (UI): 85%+</li>
+                                    <li>Ahmadu Bello University (ABU): 75%+</li>
+                                    <li>Obafemi Awolowo University (OAU): 80%+</li>
+                                    <li>University of Nigeria, Nsukka (UNN): 78%+</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Engineering</td>
+                            <td class="medium">₦500,000 - ₦5,000,000</td>
+                            <td class="medium">Medium</td>
+                            <td>
+                                <ul>
+                                    <li>University of Lagos (UNILAG): 70%+</li>
+                                    <li>Federal University of Technology, Akure (FUTA): 75%+</li>
+                                    <li>University of Ilorin (UNILORIN): 72%+</li>
+                                    <li>Ahmadu Bello University (ABU): 68%+</li>
+                                    <li>Federal University of Technology, Minna (FUTMinna): 65%+</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Law</td>
+                            <td class="medium">₦700,000 - ₦8,000,000</td>
+                            <td class="medium">Medium</td>
+                            <td>
+                                <ul>
+                                    <li>University of Lagos (UNILAG): 75%+</li>
+                                    <li>University of Ibadan (UI): 80%+</li>
+                                    <li>University of Nigeria, Nsukka (UNN): 74%+</li>
+                                    <li>Ahmadu Bello University (ABU): 70%+</li>
+                                    <li>Obafemi Awolowo University (OAU): 72%+</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Technology</td>
+                            <td class="high">₦1,000,000 - ₦15,000,000+</td>
+                            <td class="high">High</td>
+                            <td>
+                                <ul>
+                                    <li>University of Lagos (UNILAG): 65%+</li>
+                                    <li>Federal University of Technology, Akure (FUTA): 68%+</li>
+                                    <li>University of Ilorin (UNILORIN): 70%+</li>
+                                    <li>University of Nigeria, Nsukka (UNN): 65%+</li>
+                                    <li>Ahmadu Bello University (ABU): 64%+</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Business & Entrepreneurship</td>
+                            <td class="high">₦1,000,000 - ₦20,000,000+</td>
+                            <td class="high">High</td>
+                            <td>
+                                <ul>
+                                    <li>University of Lagos (UNILAG): 60%+</li>
+                                    <li>University of Ibadan (UI): 65%+</li>
+                                    <li>Ahmadu Bello University (ABU): 60%+</li>
+                                    <li>University of Ilorin (UNILORIN): 63%+</li>
+                                    <li>Obafemi Awolowo University (OAU): 62%+</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Agriculture</td>
+                            <td class="medium">₦300,000 - ₦3,000,000</td>
+                            <td class="medium">Medium</td>
+                            <td>
+                                <ul>
+                                    <li>University of Ibadan (UI): 60%+</li>
+                                    <li>Federal University of Agriculture, Abeokuta (FUNAAB): 65%+</li>
+                                    <li>Ahmadu Bello University (ABU): 55%+</li>
+                                    <li>University of Nigeria, Nsukka (UNN): 58%+</li>
+                                    <li>University of Ilorin (UNILORIN): 60%+</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="cta-container">
+                <p class="cta-text">Not sure which career path is right for you? Explore various options and seek
+                    guidance from professionals in your areas of interest. The right career for you is one that
+                    aligns with your passions and skills.</p>
+                <a href="../Html/Career-Resources.html" class="cta-link">Learn More About Career Options</a>
+            </div>
+        </div>
+    </section>
+
+
+    <footer
+        style="text-align: center; padding: 30px; font-size: 16px; background-color: #333; color: #fff; border-top: 3px solid #4CAF50;">
+        <p style="margin: 0;">Website Built with Passion by <strong style="color: #4CAF50;">[Nosakhare Divine]</strong>
+        </p>
+        <small style="font-size: 14px; color: #bbb;">© 2025 All rights reserved.</small>
+    </footer>
+
+
+    <!-- Career Guide Close -->
+
+
+
+
+
+
+    <!--     
+    <section class="jamb-preparation">
+  <div class="jamb-image-container"> -->
+    <!-- Large screen image will be inserted here by the user -->
+    <!-- <img src="../assets/images/Homepage/JAMB-Syllabus-7.png" alt="JAMB Preparation" class="jamb-image">
+  </div>
+  <div class="jamb-text">
+    <h2>JAMB Preparation: A Guide to Success</h2>
+    <p>Preparing for the Joint Admission Matriculation Board (JAMB) exam is an essential step for secondary school students in Nigeria and many other African countries. It's crucial to be serious and focused on your studies, creating a structured study plan and consistently adhering to it. Understanding the exam format, practicing past questions, and dedicating sufficient time for each subject are key factors in acing the exam.</p>
+    <p>Remember that success is not just about hard work; it's about smart work. Make sure you revise often, set achievable goals, and take regular breaks to avoid burnout. JAMB requires not just academic knowledge but also time management, perseverance, and a positive mindset.</p>
+    <p>In the months leading up to the exam, it's important to stay committed to your preparation. Stay away from distractions, focus on your goal, and do not procrastinate. The more dedicated you are to your studies, the more confident you will be on exam day. Best of luck!</p>
+  </div>
+</section> -->
+
+    <script src="./JavaScript/home.js"></script>
+
+    <!-- || Timetable -->
+
+    <script>
+        document.getElementById('generate-table').addEventListener('click', function () {
+            // Get selected subjects and abbreviate them
+            const subjects = [
+                document.getElementById('subject1').value.slice(0, 3).toUpperCase(),
+                document.getElementById('subject2').value.slice(0, 3).toUpperCase(),
+                document.getElementById('subject3').value.slice(0, 3).toUpperCase(),
+                document.getElementById('subject4').value.slice(0, 3).toUpperCase()
+            ];
+
+            // Validate selection
+            if (subjects.includes("") || new Set(subjects).size !== subjects.length) {
+                alert("Please select four unique subjects.");
+                return;
+            }
+
+            // Weighted subject array
+            const weightedSubjects = [
+                ...Array(7).fill(subjects[0]), // First choice: 7 times
+                ...Array(5).fill(subjects[1]), // Second choice: 5 times
+                ...Array(4).fill(subjects[2]), // Third choice: 4 times
+                ...Array(4).fill(subjects[3])  // Fourth choice: 4 times
+            ];
+
+            // Shuffle weighted subjects randomly
+            const shuffledSubjects = weightedSubjects.sort(() => Math.random() - 0.5);
+
+            // Days of the week
+            const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+            const timetable = [];
+
+            // Fill each day with 4 subjects
+            let index = 0;
+            for (let i = 0; i < days.length; i++) {
+                timetable.push({
+                    day: days[i],
+                    subjects: shuffledSubjects.slice(index, index + 4)
+                });
+                index += 4;
+            }
+
+            // Populate the table
+            const tableBody = document.getElementById('timetable-body');
+            tableBody.innerHTML = "";
+            timetable.forEach(entry => {
+                const row = `<tr>
+              <td>${entry.day}</td>
+              ${entry.subjects
+                        .map((subj, idx) => `<td><span class="subject subject-${idx + 1}">${subj}</span></td>`)
+                        .join("")}
+            </tr>`;
+                tableBody.innerHTML += row;
+            });
+
+            // Toggle visibility
+            document.getElementById('form-section').classList.add('hidden');
+            document.getElementById('table-section').classList.remove('hidden');
+            document.getElementById('action-buttons').classList.remove('hidden');
+        });
+
+        // Redo button - Regenerate the timetable
+        document.getElementById('redo-timetable').addEventListener('click', function () {
+            document.getElementById('generate-table').click(); // Trigger the table generation again
+        });
+
+        // Change Choices button - Go back to the subject selection
+        document.getElementById('change-choices').addEventListener('click', function () {
+            document.getElementById('form-section').classList.remove('hidden');
+            document.getElementById('table-section').classList.add('hidden');
+            document.getElementById('action-buttons').classList.add('hidden');
+        });
+    </script>
+
+</body>
+
+</html>

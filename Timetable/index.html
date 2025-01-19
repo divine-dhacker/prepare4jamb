@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TempTable Creator</title>
+ <style>
+  /* General body styling */
+  body {
+    font-family: 'Arial', sans-serif;
+    margin: 20px;
+    padding: 0;
+    background: linear-gradient(to bottom right, #ece9e6, #ffffff);
+  }
+
+  h1, p {
+    text-align: center;
+    color: #333;
+  }
+
+  .container {
+    max-width: 700px;
+    margin: 20px auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+  }
+
+  select {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+    transition: border-color 0.3s ease;
+  }
+
+  select:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    background: linear-gradient(to right, #007bff, #0056b3);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  button:hover {
+    background: linear-gradient(to right, #0056b3, #003d80);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color: #333;
+  }
+
+  th {
+    background: #007bff;
+    color: #ffffff;
+    font-size: 16px;
+  }
+
+  tr:nth-child(even) {
+    background: #f9f9f9;
+  }
+
+  tr:nth-child(odd) {
+    background: #ffffff;
+  }
+
+  tr:hover {
+    background: #f1f1f1;
+  }
+
+  /* Add subtle column animations */
+  td {
+    position: relative;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  td:hover {
+    background-color: #007bff;
+    color: white;
+    transform: scale(1.05);
+  }
+</style>
+  
+  <style>
+  /* General table styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+  }
+
+  table th, table td {
+    border: 1px solid #ddd;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  table th {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+  }
+
+  table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  table tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+
+  .subject {
+    font-weight: bold;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+  }
+
+  /* Subject colors */
+  .subject-1 { background-color: #ff6b6b; } /* Red */
+  .subject-2 { background-color: #4ecdc4; } /* Teal */
+  .subject-3 { background-color: #5567ff; } /* Blue */
+  .subject-4 { background-color: #ffcc00; } /* Yellow */
+</style>
+  
+</head>
+<body>
+ </h1>
+  <p>Please select your four subjects based on your path (e.g., Physical Science offers Mathematics, while Biological Science does not).</p>
+  <div class="container">
+    <div id="form-section">
+      <div class="form-group">
+        <label for="subject1">Subject 1 (Highest Priority):</label>
+        <select id="subject1">
+          <option value="" disabled selected>Select a subject</option>
+          <option value="Mathematics">Mathematics</option>
+          <option value="English">English</option>
+          <option value="Physics">Physics</option>
+          <option value="Biology">Biology</option>
+          <option value="Chemistry">Chemistry</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="subject2">Subject 2:</label>
+        <select id="subject2">
+          <option value="" disabled selected>Select a subject</option>
+          <option value="Mathematics">Mathematics</option>
+          <option value="English">English</option>
+          <option value="Physics">Physics</option>
+          <option value="Biology">Biology</option>
+          <option value="Chemistry">Chemistry</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="subject3">Subject 3:</label>
+        <select id="subject3">
+          <option value="" disabled selected>Select a subject</option>
+          <option value="Mathematics">Mathematics</option>
+          <option value="English">English</option>
+          <option value="Physics">Physics</option>
+          <option value="Biology">Biology</option>
+          <option value="Chemistry">Chemistry</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="subject4">Subject 4 (Lowest Priority):</label>
+        <select id="subject4">
+          <option value="" disabled selected>Select a subject</option>
+          <option value="Mathematics">Mathematics</option>
+          <option value="English">English</option>
+          <option value="Physics">Physics</option>
+          <option value="Biology">Biology</option>
+          <option value="Chemistry">Chemistry</option>
+        </select>
+      </div>
+      <button id="generate-table">Create Table</button>
+    </div>
+    <div id="table-section" class="hidden">
+      <h2>Your Weekly Timetable</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Subject</th>
+          </tr>
+        </thead>
+        <tbody id="timetable-body"></tbody>
+      </table>
+    </div>
+  </div>
+  
+  <!-- Buttons to redo or change choices -->
+<div id="action-buttons" class="hidden">
+   <div style="display: flex; gap: 12px;">
+      <button id="redo-timetable">Redo Timetable</button>
+      <button id="change-choices">Change Choices</button>
+    </div>
+</div>
+  
+<script>
+  document.getElementById('generate-table').addEventListener('click', function () {
+    // Get selected subjects and abbreviate them
+    const subjects = [
+      document.getElementById('subject1').value.slice(0, 3).toUpperCase(),
+      document.getElementById('subject2').value.slice(0, 3).toUpperCase(),
+      document.getElementById('subject3').value.slice(0, 3).toUpperCase(),
+      document.getElementById('subject4').value.slice(0, 3).toUpperCase()
+    ];
+
+    // Validate selection
+    if (subjects.includes("") || new Set(subjects).size !== subjects.length) {
+      alert("Please select four unique subjects.");
+      return;
+    }
+
+    // Weighted subject array
+    const weightedSubjects = [
+      ...Array(7).fill(subjects[0]), // First choice: 7 times
+      ...Array(5).fill(subjects[1]), // Second choice: 5 times
+      ...Array(4).fill(subjects[2]), // Third choice: 4 times
+      ...Array(4).fill(subjects[3])  // Fourth choice: 4 times
+    ];
+
+    // Shuffle weighted subjects randomly
+    const shuffledSubjects = weightedSubjects.sort(() => Math.random() - 0.5);
+
+    // Days of the week
+    const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+    const timetable = [];
+
+    // Fill each day with 4 subjects
+    let index = 0;
+    for (let i = 0; i < days.length; i++) {
+      timetable.push({
+        day: days[i],
+        subjects: shuffledSubjects.slice(index, index + 4)
+      });
+      index += 4;
+    }
+
+    // Populate the table
+    const tableBody = document.getElementById('timetable-body');
+    tableBody.innerHTML = "";
+    timetable.forEach(entry => {
+      const row = `<tr>
+        <td>${entry.day}</td>
+        ${entry.subjects
+          .map((subj, idx) => `<td><span class="subject subject-${idx + 1}">${subj}</span></td>`)
+          .join("")}
+      </tr>`;
+      tableBody.innerHTML += row;
+    });
+
+    // Toggle visibility
+    document.getElementById('form-section').classList.add('hidden');
+    document.getElementById('table-section').classList.remove('hidden');
+    document.getElementById('action-buttons').classList.remove('hidden');
+  });
+
+  // Redo button - Regenerate the timetable
+  document.getElementById('redo-timetable').addEventListener('click', function () {
+    document.getElementById('generate-table').click(); // Trigger the table generation again
+  });
+
+  // Change Choices button - Go back to the subject selection
+  document.getElementById('change-choices').addEventListener('click', function () {
+    document.getElementById('form-section').classList.remove('hidden');
+    document.getElementById('table-section').classList.add('hidden');
+    document.getElementById('action-buttons').classList.add('hidden');
+  });
+</script>
+</body>
+</html>
