@@ -185,3 +185,91 @@ h2 {
 .options button:hover {
   background: #45a049;
 }
+
+
+
+
+
+   
+    
+    
+    
+    .blog-overview {
+    padding: 20px;
+    background-color: #f9f9f9;
+    margin: 20px auto;
+    width: 90%;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.blog-overview h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.topics-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.topic {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.topic:hover {
+    transform: translateY(-5px);
+}
+
+.topic h2 {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.topic p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+.topic .buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.topic button {
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.topic button:first-child {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.topic button:first-child:hover {
+    background-color: #45A049;
+}
+
+.topic button:last-child {
+    background-color: #008CBA;
+    color: white;
+}
+
+.topic button:last-child:hover {
+    background-color: #007BB5;
+}
