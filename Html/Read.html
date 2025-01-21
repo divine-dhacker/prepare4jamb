@@ -58,6 +58,41 @@
     </nav>
     <!-- Header Close -->
 
+
+
+    <!-- Blog -->
+    
+    <section class="blog-overview">
+    <h1>Explore Our 30 Topics</h1>
+    <div class="topics-container">
+        <!-- Example Topic -->
+        <div class="topic">
+            <h2>1. How to Register for JAMB</h2>
+            <p>Learn how to successfully complete your JAMB registration process without errors. This guide includes tips and steps to follow.</p>
+            <div class="buttons">
+                <button onclick="location.href='how-to-register.html'">Read More</button>
+                <button onclick="bookmarkTopic(1)">Bookmark</button>
+            </div>
+        </div>
+
+        <div class="topic">
+            <h2>2. Top Ten Reasons Why Students Fail JAMB</h2>
+            <p>Understand the most common pitfalls and how to avoid them to increase your chances of excelling in JAMB.</p>
+            <div class="buttons">
+                <button onclick="location.href='why-students-fail.html'">Read More</button>
+                <button onclick="bookmarkTopic(2)">Bookmark</button>
+            </div>
+        </div>
+
+        <!-- Add similar blocks for all 30 topics -->
+    </div>
+</section>
+    
+    <!-- Blog End -->
+
+    
+    
+
     <section class="hero">
         <h1>JAMB 2025 Physics Syllabus</h1>
         <table>
@@ -683,6 +718,30 @@
 
 
     <script src="../JavaScript/home.js"></script>
+
+
+    <script>
+    function bookmarkTopic(topicId) {
+        // Alert the user
+        alert("Topic " + topicId + " has been bookmarked!");
+
+        // Save the bookmarked topic to localStorage
+        let bookmarks = JSON.parse(localStorage.getItem("bookmarkedTopics")) || [];
+        if (!bookmarks.includes(topicId)) {
+            bookmarks.push(topicId);
+            localStorage.setItem("bookmarkedTopics", JSON.stringify(bookmarks));
+        } else {
+            alert("Topic " + topicId + " is already bookmarked!");
+        }
+    }
+
+    // Optionally, display bookmarked topics on page load
+    document.addEventListener("DOMContentLoaded", () => {
+        const bookmarks = JSON.parse(localStorage.getItem("bookmarkedTopics")) || [];
+        console.log("Bookmarked Topics:", bookmarks); // For testing purposes
+    });
+</script>
+    
 
 </body>
 
