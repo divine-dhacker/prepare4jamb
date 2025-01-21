@@ -1,3 +1,1 @@
-User-agent: *
-Disallow:
-Sitemap: https://prepare4jamb.com.ng/sitemap.xml
+google-site-verification=9HBeuhQh8ieuno4bLOPBRBa4iPut4KbnOG8VOhs7Gx8
