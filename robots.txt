@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://prepare4jamb.com.ng/sitemap.xml
