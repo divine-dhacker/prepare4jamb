@@ -751,7 +751,7 @@ nav .hamburger span {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        gap: 8rem;
+        gap: 6.5rem;
         align-items: center;
     }
 }
@@ -917,31 +917,285 @@ nav .hamburger span {
 }
 
 
-/* Mobile (max-width: 480px) */
-@media (max-width: 480px) {
 
-    .countdown-timer {
-        justify-content: center;
+
+/* || BLOG  */
+
+
+/* Blog section styles */
+.blog-section {
+    margin-top: 50px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+/* Blog post container */
+.blog-post {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+    line-height: 1.8;
+}
+
+/* Blog title styles */
+.blog-title {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Subheading styles */
+.sub-heading {
+    font-size: 1.6em;
+    color: #4CAF50;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+/* Blog content */
+.blog-text {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* List styles */
+.ul {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.li {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.li strong {
+    color: #24f52b;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .blog-title {
+        font-size: 1.8em;
+    }
+
+    .sub-heading {
+        font-size: 1.4em;
+    }
+
+    .blog-text {
+        font-size: 1em;
     }
 }
 
-/* Tablets (min-width: 481px to 768px) */
-@media (min-width: 481px) and (max-width: 768px) {
-    .countdown-timer span {
-        font-size: 1.75rem;
-        margin: 15px 5px;
-        padding: 5px 12px;
+
+/* Welcome */
+
+.welcome-section {
+    background-color: #f0f8ff;
+    /* Light blue background */
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.welcome-message {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+.welcome-title {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #0077b6;
+    /* Blue color */
+}
+
+.welcome-text {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+/* || WELCOME */
+
+.welcome-section {
+    background-color: #f0f8ff;
+    /* Light blue background */
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.welcome-message {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+.welcome-title {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #0077b6;
+    /* Blue color */
+}
+
+.welcome-text {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+
+
+/* || QUIZ  */
+
+/* Quiz Container */
+.quiz-container {
+    width: 90%;
+    max-width: 600px;
+    margin: 2rem auto;
+    background-color: #ffffff;
+    /* Background to make it pop */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    font-family: 'Orbitron', sans-serif;
+    /* Match your website font */
+}
+
+/* Quiz Header */
+.quiz-container h2 {
+    font-size: 1.8rem;
+    color: #003366;
+    /* A bold blue shade */
+    text-align: center;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+}
+
+/* Question Container */
+.question-container {
+    margin-bottom: 1.5rem;
+}
+
+/* Question Text */
+.question-container .question {
+    font-size: 1.2rem;
+    color: #333333;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+/* Options List */
+.options {
+    list-style: none;
+    padding: 0;
+}
+
+.options li {
+    background-color: #f0f8ff;
+    /* Light blue for hover contrast */
+    border: 2px solid #dcdcdc;
+    border-radius: 5px;
+    padding: 0.8rem 1rem;
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+/* Hover & Active State for Options */
+.options li:hover {
+    background-color: #003366;
+    /* Dark blue hover */
+    color: #ffffff;
+}
+
+.options li:active {
+    transform: scale(0.98);
+}
+
+/* Submit Button */
+.btn {
+    background-color: #003366;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: block;
+    margin: 1rem auto;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #00509e;
+    /* Slightly lighter shade on hover */
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Result Section */
+.result {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: bold;
+    color: #003366;
+}
+
+/* Call-to-Action Message */
+.cta-message {
+    font-size: 1rem;
+    color: #003366;
+    /* Matches the theme */
+    text-align: center;
+    margin-top: 1rem;
+    font-style: italic;
+    font-weight: bold;
+    background-color: #f0f8ff;
+    /* Light background for emphasis */
+    padding: 0.8rem 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Fade-In Animation for CTA */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-/* Larger Tablets and Small Desktop (min-width: 769px to 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {}
 
-/* Desktop (min-width: 1025px) */
-@media (min-width: 1025px) {
-    .countdown-timer span {
-        font-size: 2.5rem;
-        margin: 25px 15px;
-        padding: 5px 20px;
-    }
-}
+
+/* || Responsive */
