@@ -97,3 +97,38 @@ function initCalendar() {
 setInterval(updateCountdown, 1000);
 initCalendar();
 
+
+
+
+
+// PUSH NOTIFICATIONS
+
+// Check if the browser supports notifications
+if ("Notification" in window) {
+    // Function to request permission for push notifications
+    function requestNotificationPermission() {
+        // Check the current permission status
+        if (Notification.permission === "default") {
+            // Ask the user for permission
+            Notification.requestPermission().then(function(permission) {
+                if (permission === "granted") {
+                    console.log("Notification permission granted.");
+                    // Optionally, you can handle the logic to subscribe to push notifications here
+                } else {
+                    console.log("Notification permission denied.");
+                }
+            });
+        } else if (Notification.permission === "granted") {
+            console.log("Notification permission already granted.");
+        } else {
+            console.log("Notification permission denied previously.");
+        }
+    }
+
+    // Trigger the notification permission request when the page loads
+    window.onload = function() {
+        requestNotificationPermission();
+    };
+} else {
+    console.log("This browser does not support notifications.");
+}
