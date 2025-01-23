@@ -751,7 +751,7 @@ nav .hamburger span {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        gap: 5rem;
+        gap: 8rem;
         align-items: center;
     }
 }
