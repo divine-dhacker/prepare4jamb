@@ -749,6 +749,64 @@
         });
     </script>
 
+
+    <script>
+        let selectedAnswer = '';
+        let correctAnswer = 'C'; // Correct answer for the question
+
+        // Function to select an answer
+        function selectAnswer(answer) {
+            selectedAnswer = answer;
+            const options = document.querySelectorAll('.options li');
+            options.forEach(option => {
+                option.style.backgroundColor = '#f2f2f2'; // Reset all options background
+                option.style.color = '#333'; // Reset all options text color
+            });
+
+            // Highlight selected answer
+            if (answer === 'A') {
+                document.querySelectorAll('.options li')[0].style.backgroundColor = '#4CAF50';
+                document.querySelectorAll('.options li')[0].style.color = '#fff';
+            } else if (answer === 'B') {
+                document.querySelectorAll('.options li')[1].style.backgroundColor = '#4CAF50';
+                document.querySelectorAll('.options li')[1].style.color = '#fff';
+            } else if (answer === 'C') {
+                document.querySelectorAll('.options li')[2].style.backgroundColor = '#4CAF50';
+                document.querySelectorAll('.options li')[2].style.color = '#fff';
+            } else if (answer === 'D') {
+                document.querySelectorAll('.options li')[3].style.backgroundColor = '#4CAF50';
+                document.querySelectorAll('.options li')[3].style.color = '#fff';
+            }
+        }
+
+        // Function to check the selected answer
+        function checkAnswer() {
+            const result = document.getElementById('result');
+            if (selectedAnswer === '') {
+                result.innerHTML = 'Please select an answer.';
+                result.style.color = '#ff5722';
+            } else if (selectedAnswer === correctAnswer) {
+                result.innerHTML = 'Correct! The answer is (C).';
+                result.style.color = '#4CAF50';
+            } else {
+                result.innerHTML = 'Wrong answer! The correct answer is (C).';
+                result.style.color = '#ff5722';
+            }
+
+            // Disable further clicking of options
+            const options = document.querySelectorAll('.options li');
+            options.forEach(option => {
+                option.style.pointerEvents = 'none'; // Disable clicks on options
+            });
+        }
+
+    </script>
+    
+
+
+    
+    
+
 </body>
 
 </html>
