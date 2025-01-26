@@ -425,7 +425,7 @@ function checkAnswer(selectedOption) {
 function showResult() {
   questionElement.style.display = "none";
   optionsElement.style.display = "none";
-  resultElement.textContent = `Hello ${userName}, you scored ${score} out of ${selectedSubjects.length * 2}`;
+  resultElement.textContent = `Hello ${userName}, you scored ${score} out of ${selectedSubjects.length * 30}`;
 
   if (failedQuestions.length > 0) {
     failedQuestionsElement.innerHTML = `<h3>Questions You Failed:</h3><ul>`;
@@ -452,7 +452,7 @@ function showResult() {
     if (navigator.share) {
       navigator.share({
         title: 'JAMB CBT Practice Quiz Result',
-        text: `${userName} scored ${score} out of ${selectedSubjects.length * 2}. Check out my quiz results!`,
+        text: `${userName} scored ${score} out of ${selectedSubjects.length * 30}. Check out my quiz results!`,
         url: shareUrl
       }).then(() => console.log('Share successful'))
         .catch(error => console.log('Error sharing:', error));
