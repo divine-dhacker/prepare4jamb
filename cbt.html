@@ -452,7 +452,7 @@ function showResult() {
     if (navigator.share) {
       navigator.share({
         title: 'JAMB CBT Practice Quiz Result',
-        text: `${userName} scored ${score} out of ${selectedSubjects.length * 30}. Check out my quiz results!`,
+        text: `${userName} scored ${score} out of ${selectedSubjects.length * 30}. Check out my quiz results! 👇🏽👇🏽`,
         url: shareUrl
       }).then(() => console.log('Share successful'))
         .catch(error => console.log('Error sharing:', error));
