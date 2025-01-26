@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JAMB CBT Practice</title>
+  <link rel="stylesheet" href="styles.css">
+    <style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    width: 70%;
+    margin: 30px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  h1, h3 {
+    color: #2c3e50;
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  .question {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  .options {
+    margin-top: 20px;
+  }
+
+  .options label {
+    display: block;
+    padding: 12px 20px;
+    background-color: #ecf0f1;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .options label:hover {
+    background-color: #3498db;
+    transform: scale(1.05);
+  }
+
+  .options input {
+    margin-right: 10px;
+  }
+
+  #startQuizBtn, #shareBtn, #tryAgainBtn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  #startQuizBtn {
+    background-color: #2ecc71;
+    color: white;
+  }
+
+  #startQuizBtn:hover {
+    background-color: #27ae60;
+    transform: scale(1.05);
+  }
+
+  #shareBtn {
+    background-color: #3498db;
+    color: white;
+  }
+
+  #shareBtn:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+  }
+
+  #tryAgainBtn {
+    background-color: #e74c3c;
+    color: white;
+  }
+
+  #tryAgainBtn:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+  }
+
+  .result {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #2ecc71;
+    margin-top: 30px;
+  }
+
+  .failed-questions {
+    margin-top: 30px;
+    font-size: 1.2rem;
+    color: #e74c3c;
+  }
+
+  .failed-questions ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .failed-questions li {
+    margin-bottom: 12px;
+  }
+
+  #subjects label {
+    font-size: 1.2rem;
+    display: inline-block;
+    margin-right: 15px;
+    cursor: pointer;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    font-size: 1.2rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: #ecf0f1;
+    transition: border-color 0.3s ease;
+  }
+
+  input[type="text"]:focus {
+    border-color: #3498db;
+  }
+
+  #subject-selection-form {
+    margin: 3rem 0;
+    text-align: center;
+  }
+
+  #subject-selection-form button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  #subject-selection-form button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+  }
+
+  #startQuizBtn, #subject-selection-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>JAMB CBT Practice</h1>
+    
+    <div id="startSection">
+      <h3>Enter your name and select your subjects</h3>
+      <input type="text" id="userName" placeholder="Enter your name" />
+      
+      <div id="subjects">
+        <label><input type="checkbox" id="math" name="select"> Mathematics</label> <br>
+        <label><input type="checkbox" id="eng" name="select"> English</label>
+        <br>
+        <label><input type="checkbox" id="phy"> Physics</label>
+        <br>
+        <label><input type="checkbox" id="chem"> Chemistry</label>
+        <br>
+        <label><input type="checkbox" id="econ"> Economics</label>
+        <br>
+        <label><input type="checkbox" id="govt"> Government</label>
+      </div>
+      
+      <button id="startQuizBtn">Start Quiz</button>
+    </div>
+
+    <div id="quizSection" style="display: none;">
+      <div class="question" id="question">Loading question...</div>
+      <div class="options" id="options"></div>
+    </div>
+
+    <div class="result" id="result"></div>
+    <div class="failed-questions" id="failedQuestions"></div>
+
+    <div class="share-link" id="shareLinkSection" style="display: none;">
+      <button id="shareBtn">Share Your Result</button>
+      <br>
+    </div>
+    <div id="tryAgainBtnSection" style="display: none;">
+      <button id="tryAgainBtn">Try Again</button>
+    </div>
+  </div>
+
+  <script>
+      const questions = {
+  math: [
+    { question: "What is 2 + 2?", options: ["3", "4", "5", "6"], answer: "4" },
+    { question: "What is 5 x 5?", options: ["20", "25", "30", "35"], answer: "25" },
+    { question: "What is the square root of 144?", options: ["10", "11", "12", "13"], answer: "12" },
+    { question: "If 3x + 2 = 11, what is x?", options: ["3", "2", "1", "4"], answer: "3" },
+    { question: "What is the value of π?", options: ["3.14", "3.15", "3.16", "3.13"], answer: "3.14" },
+    { question: "What is the area of a rectangle with length 6 cm and width 4 cm?", options: ["24 cm²", "20 cm²", "28 cm²", "30 cm²"], answer: "24 cm²" },
+    { question: "Solve for x: 5x - 3 = 22", options: ["4", "5", "6", "7"], answer: "5" },
+    { question: "What is the derivative of x²?", options: ["2x", "x", "3x", "x²"], answer: "2x" },
+    { question: "What is the product of 12 and 15?", options: ["180", "200", "150", "100"], answer: "180" },
+    { question: "What is 100 divided by 5?", options: ["10", "20", "30", "25"], answer: "20" },
+    { question: "What is the value of sin(90°)?", options: ["1", "0", "-1", "0.5"], answer: "1" },
+    { question: "Find the value of x in the equation x² - 9 = 0", options: ["-3", "3", "6", "9"], answer: "3" },
+    { question: "The sum of two numbers is 20, and their difference is 4. What are the numbers?", options: ["12 and 8", "14 and 6", "10 and 10", "16 and 4"], answer: "12 and 8" },
+    { question: "What is the angle of a triangle with angles 45°, 45°, and 90°?", options: ["90°", "180°", "270°", "360°"], answer: "180°" },
+    { question: "What is the perimeter of a square with side length 5 cm?", options: ["15 cm", "25 cm", "20 cm", "30 cm"], answer: "20 cm" },
+    { question: "If the equation of a line is y = 3x + 2, what is the slope?", options: ["3", "2", "1", "0"], answer: "3" },
+    { question: "What is the volume of a cube with side length 4 cm?", options: ["64 cm³", "32 cm³", "16 cm³", "8 cm³"], answer: "64 cm³" },
+    { question: "Which of the following is a prime number?", options: ["9", "11", "15", "21"], answer: "11" },
+    { question: "What is 10 factorial (10!)?", options: ["3628800", "1000", "500", "10000"], answer: "3628800" },
+    { question: "What is the probability of drawing an Ace from a deck of cards?", options: ["1/13", "1/52", "1/26", "1/39"], answer: "1/13" },
+    { question: "What is the value of tan(45°)?", options: ["1", "0", "-1", "2"], answer: "1" },
+    { question: "Find the value of x: 2(x - 3) = 14", options: ["5", "7", "8", "6"], answer: "10" },
+    { question: "Which of the following is an arithmetic sequence?", options: ["1, 4, 7, 10", "1, 2, 3, 5", "2, 4, 8, 16", "3, 6, 9, 12"], answer: "1, 4, 7, 10" },
+    { question: "What is the cube root of 64?", options: ["2", "4", "8", "3"], answer: "4" },
+    { question: "What is the sum of the angles of a triangle?", options: ["180°", "90°", "360°", "270°"], answer: "180°" },
+    { question: "Which of the following is a rational number?", options: ["π", "√2", "1/2", "e"], answer: "1/2" },
+    { question: "If the area of a circle is 78.5 cm², what is its radius? (Use π = 3.14)", options: ["5 cm", "7 cm", "10 cm", "6 cm"], answer: "5 cm" },
+    { question: "What is the sine of 30°?", options: ["0.5", "1", "0.7", "0.6"], answer: "0.5" },
+    { question: "The length of a rectangle is 10 cm, and the width is 4 cm. What is its area?", options: ["40 cm²", "14 cm²", "30 cm²", "25 cm²"], answer: "40 cm²" },
+    { question: "What is the area of a triangle with base 8 cm and height 6 cm?", options: ["24 cm²", "16 cm²", "12 cm²", "10 cm²"], answer: "24 cm²" },
+    { question: "What is the sum of the first 10 odd numbers?", options: ["100", "50", "55", "60"], answer: "100" },
+    { question: "How many faces does a cube have?", options: ["4", "6", "8", "12"], answer: "6" },
+    { question: "What is the product of 3 and 7?", options: ["20", "21", "22", "23"], answer: "21" }
+  ],
+  eng: [
+    { question: "Choose the word that is most nearly opposite in meaning to 'abundant'.", options: ["scarce", "plentiful", "ample", "overflowing"], answer: "scarce" },
+    { question: "Which of the following is an example of a metaphor?", options: ["The wind whispered through the trees.", "The sky was dark and stormy.", "She is as fast as a cheetah.", "The mountains are tall."], answer: "The wind whispered through the trees." },
+    { question: "Choose the correctly punctuated sentence.", options: ["I like reading, writing and drawing.", "I like reading writing, and drawing.", "I like, reading writing and drawing.", "I like reading, writing, and drawing."], answer: "I like reading, writing, and drawing." },
+    { question: "What is the past tense of 'go'?", options: ["goes", "gone", "going", "went"], answer: "went" },
+    { question: "Which of the following is a synonym for 'elaborate'?", options: ["simplify", "complicate", "explain", "develop"], answer: "develop" },
+    { question: "Choose the correct form of the word: 'He was ___ than his brother.'", options: ["more tall", "taller", "more taller", "most tall"], answer: "taller" },
+    { question: "Which of the following sentences is grammatically correct?", options: ["She don't like playing football.", "She doesn't like playing football.", "She don't likes playing football.", "She doesn't likes playing football."], answer: "She doesn't like playing football." },
+    { question: "Which word is a noun?", options: ["quickly", "jump", "happiness", "run"], answer: "happiness" },
+    { question: "What is the plural of 'child'?", options: ["childs", "children", "childrens", "childes"], answer: "children" },
+    { question: "What is the correct spelling of the word?", options: ["recieve", "receive", "receeve", "recive"], answer: "receive" },
+    { question: "Which of the following sentences is correct?", options: ["The dog chased it's tail.", "The dog chased its tail.", "The dog chased it tail.", "The dog chased it’s tail."], answer: "The dog chased its tail." },
+    { question: "Choose the correct form of the verb: 'The children ___ playing outside.'", options: ["is", "are", "were", "was"], answer: "are" },
+    { question: "What is the opposite of 'soft'?", options: ["hard", "rough", "smooth", "sticky"], answer: "hard" },
+    { question: "Which of the following sentences is correct?", options: ["Its a beautiful day.", "It’s a beautiful day.", "Its' a beautiful day.", "It’s a beautiful day."], answer: "It’s a beautiful day." },
+    { question: "What does the word 'benevolent' mean?", options: ["evil", "kind", "happy", "angry"], answer: "kind" },
+    { question: "What is the adverb in the sentence: 'She sings beautifully.'?", options: ["sings", "beautifully", "she", "the"], answer: "beautifully" },
+    { question: "Which of the following sentences is in the passive voice?", options: ["She ate the cake.", "The cake was eaten by her.", "She is eating the cake.", "The cake is eating her."], answer: "The cake was eaten by her." },
+    { question: "Choose the correct article: '___ apple a day keeps the doctor away.'", options: ["An", "A", "The", "None"], answer: "An" },
+    { question: "Choose the correct conjunction: 'I wanted to go to the park ___ it was raining.'", options: ["but", "and", "because", "so"], answer: "but" },
+    { question: "Which sentence is a question?", options: ["You are going to the party.", "You went to the party.", "Are you going to the party?", "You will go to the party."], answer: "Are you going to the party?" }
+  ],
+  phy: [
+    { question: "What is the SI unit of force?", options: ["Newton", "Joule", "Watt", "Volt"], answer: "Newton" },
+    { question: "What is the force that pulls objects towards the Earth?", options: ["Gravity", "Magnetism", "Friction", "Inertia"], answer: "Gravity" },
+    { question: "Which of the following is a non-renewable source of energy?", options: ["Solar energy", "Wind energy", "Coal", "Biomass"], answer: "Coal" },
+    { question: "What is the speed of light in a vacuum?", options: ["3.0 x 10^8 m/s", "3.0 x 10^5 m/s", "3.0 x 10^6 m/s", "3.0 x 10^7 m/s"], answer: "3.0 x 10^8 m/s" },
+    { question: "What is the law of motion that states an object will stay at rest unless acted upon by an external force?", options: ["First law", "Second law", "Third law", "Law of inertia"], answer: "First law" },
+    { question: "Which of these is not a form of energy?", options: ["Heat", "Light", "Sound", "Weight"], answer: "Weight" },
+    { question: "What is the energy stored in a body due to its position?", options: ["Kinetic energy", "Potential energy", "Thermal energy", "Chemical energy"], answer: "Potential energy" },
+    { question: "What is the boiling point of water?", options: ["100°C", "90°C", "110°C", "120°C"], answer: "100°C" },
+    { question: "Which of the following is a conductor of electricity?", options: ["Wood", "Rubber", "Copper", "Plastic"], answer: "Copper" },
+    { question: "What is the SI unit of power?", options: ["Watt", "Joule", "Newton", "Volt"], answer: "Watt" },
+    { question: "Which of these forces opposes the motion of objects?", options: ["Friction", "Gravity", "Electromagnetic", "Magnetic"], answer: "Friction" },
+    { question: "The speed of sound in air at 20°C is approximately?", options: ["300 m/s", "330 m/s", "350 m/s", "370 m/s"], answer: "343 m/s" },
+    { question: "What is the unit of electric charge?", options: ["Ampere", "Volt", "Coulomb", "Ohm"], answer: "Coulomb" },
+    { question: "Which of these is not a simple machine?", options: ["Lever", "Pulley", "Wheel and axle", "Motor"], answer: "Motor" },
+    { question: "What happens to the volume of a gas when its temperature increases at constant pressure?", options: ["It increases", "It decreases", "It remains the same", "It fluctuates"], answer: "It increases" },
+    { question: "Which of the following waves do not require a medium to travel?", options: ["Sound waves", "Water waves", "Light waves", "Mechanical waves"], answer: "Light waves" },
+    { question: "What is the main function of a battery in an electric circuit?", options: ["To supply current", "To supply voltage", "To increase resistance", "To reduce current"], answer: "To supply voltage" },
+    { question: "Which of the following is an example of a chemical change?", options: ["Melting ice", "Boiling water", "Rusting iron", "Freezing water"], answer: "Rusting iron" }
+  ],
+
+  // Continue to other subjects like Chemistry, Economics, Government, etc. with the same structure.
+
+  // Example for Chemistry:
+  chem: [
+    { question: "What is the atomic number of carbon?", options: ["6", "12", "8", "14"], answer: "6" },
+    { question: "Which of the following is a noble gas?", options: ["Oxygen", "Nitrogen", "Helium", "Carbon"], answer: "Helium" },
+    { question: "What is the chemical formula for water?", options: ["H2O", "CO2", "O2", "H2O2"], answer: "H2O" },
+    { question: "Which of these elements is a halogen?", options: ["Chlorine", "Oxygen", "Helium", "Carbon"], answer: "Chlorine" },
+    { question: "What is the pH value of water?", options: ["7", "5", "9", "3"], answer: "7" },
+    { question: "What is the process by which a solid turns into a gas?", options: ["Evaporation", "Sublimation", "Condensation", "Freezing"], answer: "Sublimation" },
+    { question: "Which of the following is an example of an acid?", options: ["Hydrochloric acid", "Sodium chloride", "Potassium hydroxide", "Magnesium sulfate"], answer: "Hydrochloric acid" },
+    { question: "Which of these is an example of a chemical bond?", options: ["Covalent bond", "Gravitational force", "Friction", "Magnetism"], answer: "Covalent bond" },
+    { question: "What is the boiling point of water at sea level?", options: ["100°C", "120°C", "80°C", "90°C"], answer: "100°C" },
+    { question: "What type of bond is formed between sodium and chlorine in NaCl?", options: ["Ionic", "Covalent", "Metallic", "Hydrogen"], answer: "Ionic" }
+  ],
+
+  // Example for Economics:
+  econ: [
+    { question: "What is the basic economic problem?", options: ["Scarcity", "Unemployment", "Inflation", "Trade"], answer: "Scarcity" },
+    { question: "What is GDP?", options: ["Gross Domestic Product", "Gross Departmental Product", "Global Domestic Product", "General Departmental Product"], answer: "Gross Domestic Product" },
+    { question: "Which of the following is a factor of production?", options: ["Land", "Money", "Insurance", "Bonds"], answer: "Land" },
+    { question: "What does the law of demand state?", options: ["As price increases, demand increases", "As price decreases, demand increases", "As price increases, supply increases", "As price decreases, supply decreases"], answer: "As price decreases, demand increases" },
+    { question: "What is inflation?", options: ["Increase in prices", "Decrease in prices", "Stability of prices", "Unemployment"], answer: "Increase in prices" },
+    { question: "What is the term used for the total value of goods and services produced within a country's borders?", options: ["Gross National Product", "Net National Product", "Gross Domestic Product", "Net Domestic Product"], answer: "Gross Domestic Product" },
+    { question: "Which of these is a government expenditure?", options: ["Building roads", "Printing money", "Raising interest rates", "Selling bonds"], answer: "Building roads" },
+    { question: "What is the primary objective of monetary policy?", options: ["To control inflation", "To regulate trade", "To increase taxes", "To promote free market"], answer: "To control inflation" },
+    { question: "Which of these is a type of market structure?", options: ["Monopoly", "Cash", "Securities", "Traders"], answer: "Monopoly" },
+    { question: "What does GDP per capita measure?", options: ["Standard of living", "Total population", "Government spending", "Income inequality"], answer: "Standard of living" }
+  ],
+
+  // Example for Government:
+  govt: [
+    { question: "Who is the head of state in Nigeria?", options: ["President", "Prime Minister", "Governor", "Emperor"], answer: "President" },
+    { question: "Which of the following is a feature of democracy?", options: ["One-party rule", "Direct voting", "Autocracy", "Authoritarianism"], answer: "Direct voting" },
+    { question: "What is the highest court in Nigeria?", options: ["Court of Appeal", "High Court", "Supreme Court", "Federal Court"], answer: "Supreme Court" },
+    { question: "Who makes the laws in Nigeria?", options: ["The President", "The Senate", "The Judiciary", "The Legislature"], answer: "The Legislature" },
+    { question: "What is the main function of the Executive in Nigeria?", options: ["Making laws", "Interpreting laws", "Enforcing laws", "Amending laws"], answer: "Enforcing laws" },
+    { question: "What is the role of the Independent National Electoral Commission (INEC)?", options: ["Organizing elections", "Enforcing laws", "Making policies", "Approving laws"], answer: "Organizing elections" },
+    { question: "Which of these is not a responsibility of local government in Nigeria?", options: ["Education", "Transport", "Defense", "Health"], answer: "Defense" },
+    { question: "What is the highest legislative body in Nigeria?", options: ["National Assembly", "Senate", "House of Representatives", "State Assembly"], answer: "National Assembly" },
+    { question: "How long is the tenure of a Governor in Nigeria?", options: ["4 years", "6 years", "5 years", "7 years"], answer: "4 years" },
+    { question: "What is the purpose of the Nigerian National Petroleum Corporation (NNPC)?", options: ["To regulate the oil industry", "To provide public transportation", "To offer banking services", "To oversee education"], answer: "To regulate the oil industry" }
+  ]
+};
+
+let selectedSubjects = [];
+let currentQuestionIndex = 0;
+let score = 0;
+let failedQuestions = [];
+let userName = "";
+
+const startQuizBtn = document.getElementById("startQuizBtn");
+const userNameInput = document.getElementById("userName");
+const subjects = document.querySelectorAll("#subjects input");
+const startSection = document.getElementById("startSection");
+const quizSection = document.getElementById("quizSection");
+const questionElement = document.getElementById("question");
+const optionsElement = document.getElementById("options");
+const resultElement = document.getElementById("result");
+const failedQuestionsElement = document.getElementById("failedQuestions");
+const shareLinkSection = document.getElementById("shareLinkSection");
+const shareBtn = document.getElementById("shareBtn");
+const tryAgainBtnSection = document.getElementById("tryAgainBtnSection");
+const tryAgainBtn = document.getElementById("tryAgainBtn");
+
+startQuizBtn.addEventListener("click", () => {
+  userName = userNameInput.value.trim();
+  if (!userName) {
+    alert("Please enter your name.");
+    return;
+  }
+
+  selectedSubjects = [];
+  subjects.forEach(subject => {
+    if (subject.checked) selectedSubjects.push(subject.id);
+  });
+
+  if (selectedSubjects.length < 1) {
+    alert("Please select at least one subject.");
+    return;
+  }
+
+  startSection.style.display = "none";
+  quizSection.style.display = "block";
+  loadQuestion();
+});
+
+function loadQuestion() {
+  if (selectedSubjects.length === 0) return;
+
+  const subject = selectedSubjects[Math.floor(Math.random() * selectedSubjects.length)];
+  const currentQuestion = questions[subject][currentQuestionIndex];
+
+  questionElement.textContent = currentQuestion.question;
+
+  optionsElement.innerHTML = "";
+  currentQuestion.options.forEach(option => {
+    const button = document.createElement("button");
+    button.textContent = option;
+    button.addEventListener("click", () => checkAnswer(option));
+    optionsElement.appendChild(button);
+  });
+}
+
+function checkAnswer(selectedOption) {
+  const subject = selectedSubjects[Math.floor(Math.random() * selectedSubjects.length)];
+  const currentQuestion = questions[subject][currentQuestionIndex];
+
+  if (selectedOption === currentQuestion.answer) {
+    score++;
+  } else {
+    failedQuestions.push({
+      question: currentQuestion.question,
+      correctAnswer: currentQuestion.answer,
+      yourAnswer: selectedOption
+    });
+  }
+
+  currentQuestionIndex++;
+
+  if (currentQuestionIndex < questions[subject].length) {
+    loadQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  questionElement.style.display = "none";
+  optionsElement.style.display = "none";
+  resultElement.textContent = `Hello ${userName}, you scored ${score} out of ${selectedSubjects.length * 2}`;
+
+  if (failedQuestions.length > 0) {
+    failedQuestionsElement.innerHTML = `<h3>Questions You Failed:</h3><ul>`;
+    failedQuestions.forEach(item => {
+      failedQuestionsElement.innerHTML += `
+        <li>
+          <strong>Question:</strong> ${item.question}<br>
+          <strong>Your Answer:</strong> ${item.yourAnswer}<br>
+          <strong>Correct Answer:</strong> ${item.correctAnswer}
+        </li>`;
+    });
+    failedQuestionsElement.innerHTML += `</ul>`;
+  }
+
+  // Show share button
+  shareLinkSection.style.display = "block";
+  tryAgainBtnSection.style.display = "block";
+
+  // Create the shareable URL
+  const shareUrl = `${window.location.href}?name=${encodeURIComponent(userName)}&score=${score}`;
+
+  // Share functionality
+  shareBtn.addEventListener("click", () => {
+    if (navigator.share) {
+      navigator.share({
+        title: 'JAMB CBT Practice Quiz Result',
+        text: `${userName} scored ${score} out of ${selectedSubjects.length * 2}. Check out my quiz results!`,
+        url: shareUrl
+      }).then(() => console.log('Share successful'))
+        .catch(error => console.log('Error sharing:', error));
+    } else {
+      alert("Your browser doesn't support sharing functionality.");
+    }
+  });
+}
+
+tryAgainBtn.addEventListener("click", () => {
+  // Reset for new quiz attempt
+  location.reload();
+});
+
+// Handle URL Parameters for a New User
+window.addEventListener("load", () => {
+  const params = new URLSearchParams(window.location.search);
+  const name = params.get("name");
+  const score = params.get("score");
+
+  if (name && score) {
+    // Show results for the shared URL (no need to take the quiz again)
+    startSection.style.display = "none";
+    resultElement.textContent = `Hello ${name}, you scored ${score}`;
+    shareLinkSection.style.display = "none";  // Hide the link section since it's already shared
+    tryAgainBtnSection.style.display = "block";
+  }
+});
+
+
+  </script>
+</body>
+</html>
