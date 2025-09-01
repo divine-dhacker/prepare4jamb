@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAMB English Vocabulary</title>
+    <link rel="shortcut icon" href="../assets/images/Favicon/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
+    <meta property="og:title" content="JAMB English Vocabulary" />
+    <meta property="og:description" content="Improve your vocabulary for JAMB and other exams with dynamic flashcards and quizzes." />
+    <meta property="og:image" content="https://prepare4jamb.com.ng/logo.jpeg" />
+    <style>
+        /* CSS Reset and Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F8F8F8;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Desktop responsiveness */
+        @media (min-width: 768px) {
+            .app-header,
+            .topic-selector,
+            .content-area,
+            .load-more-container,
+            .bottom-nav {
+                width: 700px;
+                margin: 0 auto;
+            }
+
+            .app-header {
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+            }
+
+            .bottom-nav {
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+            }
+
+            body {
+                padding: 20px;
+            }
+
+            main {
+                border-left: 1px solid #ddd;
+                border-right: 1px solid #ddd;
+                background-color: #fff;
+            }
+        }
+
+
+        /* Header */
+        .app-header {
+            background-color: #8BC34A;
+            padding: 1rem;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .header-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            padding: 0.5rem;
+        }
+
+        .header-btn:disabled {
+            color: rgba(255, 255, 255, 0.5);
+            cursor: not-allowed;
+        }
+
+        .header-btn:hover:not(:disabled) {
+            transform: scale(1.1);
+        }
+
+        .app-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* Topic Selector */
+        .topic-selector {
+            padding: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            width: 100%;
+            background-color: #F8F8F8;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 64px;
+            z-index: 99;
+        }
+
+        .topic-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            background-color: #f9f9f9;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .topic-btn.active,
+        .topic-btn:hover {
+            background-color: #8BC34A;
+            color: #fff;
+            border-color: #8BC34A;
+        }
+
+        /* Main Content Area */
+        .content-area {
+            width: 100%;
+            max-width: 700px;
+            padding: 1rem;
+            padding-bottom: 5rem;
+            margin: 0 auto;
+        }
+
+        /* Word Card */
+        .word-card {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            position: relative;
+            margin-bottom: 1.5rem;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .main-word {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #689F38;
+            margin-bottom: 0.5rem;
+            text-transform: capitalize;
+        }
+
+        .word-type {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            display: block;
+        }
+
+        .definition {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+            border-left: 3px solid #8BC34A;
+            padding-left: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .list-group h4 {
+            font-size: 1rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .list-group h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 40px;
+            height: 2px;
+            background-color: #8BC34A;
+        }
+
+        .list-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .list-item {
+            background-color: #E8F5E9;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #333;
+            border: 1px solid #DCDCDC;
+        }
+
+        /* Utility buttons */
+        .btn-container {
+            display: flex;
+            gap: 0.5rem;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+
+        .utility-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            font-size: 1.5rem;
+            color: #8BC34A;
+            padding: 0;
+        }
+
+        .utility-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* UNIBEN Question Overlay */
+        .uniben-question-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+            z-index: 200;
+        }
+
+        .uniben-question-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .question-box {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            text-align: left;
+            position: relative;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #7f8c8d;
+            cursor: pointer;
+        }
+
+        .question-box h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #34495e;
+        }
+
+        .question-box p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .question-box ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .question-box li {
+            background-color: #ecf0f1;
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        /* Quiz Page Styles */
+        .quiz-container {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .quiz-question {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #34495e;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .quiz-option-btn {
+            background-color: #E8F5E9;
+            color: #333;
+            border: 1px solid #DCDCDC;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .quiz-option-btn:hover:not(:disabled) {
+            background-color: #D4E9D6;
+        }
+
+        .quiz-option-btn.correct {
+            background-color: #4CAF50;
+            color: #fff;
+            border-color: #4CAF50;
+        }
+
+        .quiz-option-btn.incorrect {
+            background-color: #F44336;
+            color: #fff;
+            border-color: #F44336;
+        }
+        
+        /* Load More Button */
+        .load-more-container {
+            text-align: center;
+            padding: 1.5rem;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            margin-bottom: 36px;
+        }
+
+        .load-more-btn {
+            background-color: #8BC34A;
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .load-more-btn:hover:not(:disabled) {
+            background-color: #7CB342;
+            transform: translateY(-2px);
+        }
+
+        .load-more-btn:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .no-more-words {
+            text-align: center;
+            color: #7f8c8d;
+            padding: 2rem;
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-around;
+            padding: 0.5rem 0;
+            z-index: 150;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.7rem;
+            color: #7f8c8d;
+            gap: 0.2rem;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-btn.active {
+             color: #8BC34A;
+        }
+
+        .nav-btn:hover {
+            color: #8BC34A;
+        }
+
+        .nav-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="app-header">
+        <div class="header-buttons">
+            <button id="back-btn" class="header-btn" title="Previous Word">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+            </button>
+        </div>
+        <h1 class="app-title">English Vocabulary 📖</h1>
+        <div class="header-buttons">
+            <button id="refresh-btn" class="header-btn" title="Refresh">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M23 4v6h-6" />
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+                </svg>
+            </button>
+            <button id="forward-btn" class="header-btn" title="Next Word">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="topic-selector">
+        <button class="topic-btn active" data-topic="all">All</button>
+        <button class="topic-btn" data-topic="arts">Arts/Humanities</button>
+        <button class="topic-btn" data-topic="religious">Religious Studies</button>
+        <button class="topic-btn" data-topic="info">Info Streaming</button>
+        <button class="topic-btn" data-topic="commercials">Commercials</button>
+    </div>
+
+    <main class="content-area" id="content-area">
+        </main>
+
+    <div class="load-more-container" id="load-more-container">
+        <button id="load-more-btn" class="load-more-btn">Load More</button>
+    </div>
+
+    <div id="uniben-overlay" class="uniben-question-overlay">
+        <div class="question-box">
+            <button class="close-btn" id="close-overlay">&times;</button>
+            <h3 id="question-title"></h3>
+            <p id="question-text"></p>
+            <ul id="question-options"></ul>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <button class="nav-btn active" data-page="home" onclick="goToHome()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+            <span>Home</span>
+        </button>
+        <button class="nav-btn" data-page="policies" onclick="goToPage('policies')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="16" y1="13" x2="8" y2="13" />
+                <line x1="16" y1="17" x2="8" y2="17" />
+                <polyline points="10 9 9 9 8 9" />
+            </svg>
+            <span>Policies</span>
+        </button>
+        <button class="nav-btn" data-page="terms" onclick="goToPage('terms')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                <line x1="3" y1="9" x2="21" y2="9" />
+                <path d="M9 21V9" />
+            </svg>
+            <span>Terms of Use</span>
+        </button>
+        <button class="nav-btn" data-page="quiz" onclick="startQuiz()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M21.54 15a2 2 0 0 1-.54 1.48L14 23.44l-6.54-6.96a2 2 0 0 1-.54-1.48V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v11z" />
+                <path d="M12 8v4" />
+                <path d="M15 10l-3 3-3-3" />
+            </svg>
+            <span>Quiz Page</span>
+        </button>
+    </nav>
+
+    <script>
+        const ALL_WORDS = {
+            "all": [
+                { word: "Acrimonious", type: "Adjective", definition: "Angry and bitter, often used to describe a sharp exchange between people.", synonyms: ["rancorous", "bitter", "caustic", "hostile"], antonyms: ["harmonious", "peaceful", "cordial", "amiable"], uniben_question: { question: "Choose the word that has the same meaning as **acrimonious**.", options: ["A) Sweet", "B) Caustic", "C) Calm", "D) Gentle"], answer: "B", is_uniben: true } },
+                { word: "Capricious", type: "Adjective", definition: "Given to sudden and unaccountable changes of mood or behavior.", synonyms: ["fickle", "unpredictable", "inconstant", "erratic"], antonyms: ["consistent", "predictable", "stable", "steadfast"], uniben_question: { is_uniben: false } },
+                { word: "Ephemeral", type: "Adjective", definition: "Lasting for a very short time, often used to describe feelings or natural phenomena.", synonyms: ["fleeting", "transient", "momentary", "brief"], antonyms: ["permanent", "enduring", "eternal", "lasting"], uniben_question: { question: "Find the opposite in meaning to the word **ephemeral**.", options: ["A) Fleeting", "B) Temporary", "C) Lasting", "D) Passing"], answer: "C", is_uniben: true } },
+                { word: "Pernicious", type: "Adjective", definition: "Having a harmful effect, especially in a gradual or subtle way.", synonyms: ["malignant", "damaging", "destructive", "ruinous"], antonyms: ["beneficial", "harmless", "wholesome", "innocuous"], uniben_question: { is_uniben: false } },
+                { word: "Quixotic", type: "Adjective", definition: "Exceedingly idealistic; unrealistic and impractical, often related to grand, heroic ideas.", synonyms: ["utopian", "visionary", "romantic", "impractical"], antonyms: ["realistic", "pragmatic", "sensible", "practical"], uniben_question: { is_uniben: false } },
+                { word: "Sagacious", type: "Adjective", definition: "Having or showing keen mental discernment and good judgment; wise.", synonyms: ["wise", "shrewd", "judicious", "prudent"], antonyms: ["foolish", "unwise", "stupid", "ignorant"], uniben_question: { question: "A **sagacious** decision was made by the elders. Which of the following is an antonym for the underlined word?", options: ["A) Wise", "B) Shrewd", "C) Foolish", "D) Judicious"], answer: "C", is_uniben: true } },
+                { word: "Spurious", type: "Adjective", definition: "Not being what it purports to be; false or fake.", synonyms: ["bogus", "fake", "counterfeit", "illegitimate"], antonyms: ["genuine", "authentic", "real", "valid"], uniben_question: { is_uniben: false } },
+                { word: "Venerable", type: "Adjective", definition: "Accorded a great deal of respect, especially because of age, wisdom, or character.", synonyms: ["respected", "honored", "revered", "esteemed"], antonyms: ["dishonored", "disreputable", "unrespected", "unesteemed"], uniben_question: { is_uniben: false } },
+                { word: "Volatile", type: "Adjective", definition: "Liable to change rapidly and unpredictably, especially for the worse.", synonyms: ["unstable", "changeable", "erratic", "fickle"], antonyms: ["stable", "calm", "steady", "predictable"], uniben_question: { is_uniben: false } },
+                { word: "Sycophant", type: "Noun", definition: "A person who acts obsequiously toward someone important in order to gain advantage.", synonyms: ["flatterer", "toady", "lackey", "bootlicker"], antonyms: ["critic", "detractor", "opponent", "misanthrope"], uniben_question: { question: "From the options below, choose the option that has the opposite meaning to the underlined word. The teacher's favorite student was a **sycophant**.", options: ["A) A flatterer", "B) A bootlicker", "C) A critic", "D) A lackey"], answer: "C", is_uniben: true } },
+                { word: "Ubiquitous", type: "Adjective", definition: "Present, appearing, or found everywhere.", synonyms: ["omnipresent", "widespread", "universal", "everywhere"], antonyms: ["rare", "scarce", "uncommon"], uniben_question: { is_uniben: false } },
+                { word: "Incongruous", type: "Adjective", definition: "Not in harmony or keeping with the surroundings or other aspects of something.", synonyms: ["inappropriate", "out of place", "unsuitable", "clashing"], antonyms: ["harmonious", "fitting", "appropriate", "consistent"], uniben_question: { is_uniben: false } },
+                { word: "Gregarious", type: "Adjective", definition: "Fond of company; sociable.", synonyms: ["sociable", "outgoing", "extroverted", "friendly"], antonyms: ["introverted", "reclusive", "antisocial", "solitary"], uniben_question: { is_uniben: false } },
+                { word: "Enervate", type: "Verb", definition: "To cause (someone) to feel drained of energy or vitality.", synonyms: ["exhaust", "tire", "weaken", "fatigue"], antonyms: ["energize", "invigorate", "strengthen", "enliven"], uniben_question: { is_uniben: false } },
+                { word: "Cajole", type: "Verb", definition: "To persuade someone to do something by sustained coaxing or flattery.", synonyms: ["coax", "persuade", "wheedle", "lure"], antonyms: ["discourage", "dissuade", "repel", "force"], uniben_question: { is_uniben: false } },
+                { word: "Mitigate", type: "Verb", definition: "To make something less severe, painful, or serious.", synonyms: ["alleviate", "reduce", "lessen", "ease"], antonyms: ["aggravate", "increase", "intensify", "worsen"], uniben_question: { is_uniben: false } },
+                { word: "Insipid", type: "Adjective", definition: "Lacking flavor or interest.", synonyms: ["dull", "bland", "uninspired", "vapid"], antonyms: ["flavorful", "exciting", "interesting", "vibrant"], uniben_question: { is_uniben: false } },
+                { word: "Reticent", type: "Adjective", definition: "Not revealing one's thoughts or feelings readily.", synonyms: ["reserved", "uncommunicative", "taciturn", "introverted"], antonyms: ["extroverted", "communicative", "open", "forthcoming"], uniben_question: { is_uniben: false } },
+                { word: "Ebullient", type: "Adjective", definition: "Cheerful and full of energy.", synonyms: ["exuberant", "buoyant", "jovial", "elated"], antonyms: ["depressed", "downcast", "melancholy", "somber"], uniben_question: { is_uniben: false } },
+                { word: "Fortuitous", type: "Adjective", definition: "Happening by a lucky chance.", synonyms: ["accidental", "chance", "unplanned", "providential"], antonyms: ["unlucky", "unfortunate", "planned", "deliberate"], uniben_question: { is_uniben: false } },
+                { word: "Vacillate", type: "Verb", definition: "To alternate or waver between different opinions or actions.", synonyms: ["waver", "hesitate", "fluctuate", "dither"], antonyms: ["decide", "resolve", "stick to", "stay"], uniben_question: { is_uniben: false } },
+                { word: "Exacerbate", type: "Verb", definition: "To make (a problem, bad situation, or negative feeling) worse.", synonyms: ["aggravate", "worsen", "intensify", "compound"], antonyms: ["alleviate", "mitigate", "improve", "ease"], uniben_question: { is_uniben: false } },
+                { word: "Paradox", type: "Noun", definition: "A seemingly absurd or self-contradictory statement or proposition that when investigated or explained may prove to be well-founded or true.", synonyms: ["contradiction", "inconsistency", "enigma", "anomaly"], antonyms: ["normality", "regularity", "consistency"], uniben_question: { is_uniben: false } },
+                { word: "Obfuscate", type: "Verb", definition: "To render obscure, unclear, or unintelligible.", synonyms: ["confuse", "muddle", "bewilder", "cloud"], antonyms: ["clarify", "explain", "illuminate", "simplify"], uniben_question: { is_uniben: false } },
+                { word: "Superfluous", type: "Adjective", definition: "Unnecessary, especially through being more than enough.", synonyms: ["redundant", "excessive", "unneeded", "gratuitous"], antonyms: ["essential", "necessary", "required", "indispensable"], uniben_question: { is_uniben: false } },
+                { word: "Apathy", type: "Noun", definition: "Lack of interest, enthusiasm, or concern.", synonyms: ["indifference", "unconcern", "detachment", "lethargy"], antonyms: ["interest", "enthusiasm", "concern", "passion"], uniben_question: { is_uniben: false } },
+                { word: "Conundrum", type: "Noun", definition: "A confusing and difficult problem or question.", synonyms: ["puzzle", "riddle", "dilemma", "mystery"], antonyms: ["solution", "answer", "certainty", "clarity"], uniben_question: { is_uniben: false } },
+                { word: "Belligerent", type: "Adjective", definition: "Hostile and aggressive.", synonyms: ["hostile", "aggressive", "antagonistic", "combative"], antonyms: ["peaceful", "friendly", "amicable", "cooperative"], uniben_question: { is_uniben: false } },
+                { word: "Clemency", type: "Noun", definition: "Mercy; lenience.", synonyms: ["mercy", "leniency", "compassion", "forgiveness"], antonyms: ["ruthlessness", "harshness", "cruelty", "severity"], uniben_question: { is_uniben: false } },
+                { word: "Debacle", type: "Noun", definition: "A sudden and ignominious failure; a fiasco.", synonyms: ["fiasco", "failure", "catastrophe", "disaster"], antonyms: ["success", "triumph", "victory", "accomplishment"], uniben_question: { is_uniben: false } }
+            ],
+            "arts": [
+                { word: "Aesthetic", type: "Adjective", definition: "Concerned with beauty or the appreciation of beauty.", synonyms: ["artistic", "beautiful", "graceful", "refined"], antonyms: ["unaesthetic", "unartistic", "plain", "ugly"], uniben_question: { is_uniben: false } },
+                { word: "Prolific", type: "Adjective", definition: "Producing a great number or amount of something.", synonyms: ["productive", "creative", "fertile", "abundant"], antonyms: ["unproductive", "barren", "sparse", "sterile"], uniben_question: { is_uniben: false } },
+                { word: "Surreal", type: "Adjective", definition: "Having the qualities of surrealism; bizarre.", synonyms: ["bizarre", "dreamlike", "fantastical", "unreal"], antonyms: ["real", "normal", "ordinary", "mundane"], uniben_question: { is_uniben: false } },
+                { word: "Juxtaposition", type: "Noun", definition: "The fact of two things being seen or placed close together with contrasting effect.", synonyms: ["contrast", "comparison", "proximity"], antonyms: ["separation", "distance", "dissimilarity"], uniben_question: { is_uniben: false } },
+                { word: "Ode", type: "Noun", definition: "A lyrical poem, typically addressed to a particular subject.", synonyms: ["lyric", "poem", "song", "verse"], antonyms: ["prose", "narrative"], uniben_question: { is_uniben: false } },
+            ],
+            "religious": [
+                { word: "Piety", type: "Noun", definition: "The quality of being religious or reverent.", synonyms: ["devotion", "faith", "holiness", "piousness"], antonyms: ["impiety", "godlessness", "heresy", "blasphemy"], uniben_question: { is_uniben: false } },
+                { word: "Sanctuary", type: "Noun", definition: "A place of refuge or safety.", synonyms: ["refuge", "haven", "shelter", "asylum"], antonyms: ["danger", "peril", "threat", "exposure"], uniben_question: { is_uniben: false } },
+                { word: "Orthodox", type: "Adjective", definition: "Following traditional or established beliefs.", synonyms: ["traditional", "conventional", "conforming", "accepted"], antonyms: ["unorthodox", "unconventional", "heretical", "rebellious"], uniben_question: { is_uniben: false } },
+                { word: "Theology", type: "Noun", definition: "The study of the nature of God and religious belief.", synonyms: ["divinity", "doctrine", "creed"], antonyms: ["atheism", "secularism"], uniben_question: { is_uniben: false } },
+                { word: "Dogma", type: "Noun", definition: "A principle or set of principles laid down by an authority as incontrovertibly true.", synonyms: ["doctrine", "credo", "tenet", "canon"], antonyms: ["heresy", "skepticism", "unbelief"], uniben_question: { is_uniben: false } }
+            ],
+            "info": [
+                { word: "Curate", type: "Verb", definition: "To select, organize, and present (online content, merchandise, information, etc.), typically using expert knowledge.", synonyms: ["organize", "collect", "select", "manage"], antonyms: ["disorganize", "disperse", "neglect"], uniben_question: { is_uniben: false } },
+                { word: "Algorithm", type: "Noun", definition: "A process or set of rules to be followed in calculations or other problem-solving operations, especially by a computer.", synonyms: ["protocol", "procedure", "formula", "logic"], antonyms: ["randomness", "chaos"], uniben_question: { is_uniben: false } },
+                { word: "Disseminate", type: "Verb", definition: "To spread or disperse (something, especially information) widely.", synonyms: ["circulate", "distribute", "promulgate", "propagate"], antonyms: ["conceal", "hide", "suppress", "withhold"], uniben_question: { is_uniben: false } }
+            ],
+            "commercials": [
+                { word: "Promotional", type: "Adjective", definition: "Relating to the publicizing of a product, organization, or venture so as to increase sales or public awareness.", synonyms: ["advertising", "marketing", "publicity", "commercial"], antonyms: ["unpublicized", "unmarketed"], uniben_question: { is_uniben: false } },
+                { word: "Subliminal", type: "Adjective", definition: "Relating to things that affect your mind without your being aware of it.", synonyms: ["unconscious", "hidden", "implicit", "unperceived"], antonyms: ["conscious", "explicit", "obvious", "perceptible"], uniben_question: { is_uniben: false } },
+                { word: "Cognitive", type: "Adjective", definition: "Relating to the mental processes of perception, memory, judgment, and reasoning.", synonyms: ["intellectual", "mental", "cerebral", "thinking"], antonyms: ["emotional", "physical"], uniben_question: { is_uniben: false } }
+            ]
+        };
+
+        let wordHistory = [];
+        let currentIndex = -1;
+        let currentTopic = 'all';
+
+        const contentArea = document.getElementById('content-area');
+        const loadMoreBtn = document.getElementById('load-more-btn');
+        const loadMoreContainer = document.getElementById('load-more-container');
+        const backBtn = document.getElementById('back-btn');
+        const forwardBtn = document.getElementById('forward-btn');
+        const refreshBtn = document.getElementById('refresh-btn');
+        const topicButtons = document.querySelectorAll('.topic-btn');
+        const overlay = document.getElementById('uniben-overlay');
+        const closeOverlayBtn = document.getElementById('close-overlay');
+        const questionTitle = document.getElementById('question-title');
+        const questionText = document.getElementById('question-text');
+        const questionOptions = document.getElementById('question-options');
+        const navButtons = document.querySelectorAll('.nav-btn');
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        async function fetchRandomWords(count) {
+            loadMoreBtn.textContent = 'Loading...';
+            loadMoreBtn.disabled = true;
+
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    const allWords = Object.values(ALL_WORDS).flat();
+                    shuffleArray(allWords);
+
+                    const newWords = [];
+                    const fetchedWordsSet = new Set(wordHistory.map(w => w.word));
+                    let counter = 0;
+
+                    for (const word of allWords) {
+                        if (!fetchedWordsSet.has(word.word) && counter < count) {
+                            newWords.push(word);
+                            counter++;
+                        }
+                    }
+
+                    resolve(newWords);
+                }, 500);
+            });
+        }
+
+        function createWordCard(wordData) {
+            const card = document.createElement('div');
+            card.classList.add('word-card');
+            card.setAttribute('data-word', wordData.word);
+
+            const utilityBtnContainer = document.createElement('div');
+            utilityBtnContainer.classList.add('btn-container');
+
+            const unibenBtn = document.createElement('button');
+            unibenBtn.classList.add('utility-btn');
+            unibenBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="M12 5l7 7-7 7" /></svg>`;
+            unibenBtn.title = wordData.uniben_question.is_uniben ? "View UNIBEN Question" : "View Guess Question";
+            unibenBtn.addEventListener('click', () => {
+                showQuestion(wordData.uniben_question, wordData.word);
+            });
+
+            const shareBtn = document.createElement('button');
+            shareBtn.classList.add('utility-btn');
+            shareBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" /><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" /></svg>`;
+            shareBtn.title = "Share this word";
+            shareBtn.addEventListener('click', () => shareWord(wordData.word));
+
+            utilityBtnContainer.append(unibenBtn, shareBtn);
+
+            const mainWord = document.createElement('h2');
+            mainWord.classList.add('main-word');
+            mainWord.textContent = wordData.word;
+
+            const wordType = document.createElement('span');
+            wordType.classList.add('word-type');
+            wordType.textContent = `(${wordData.type})`;
+
+            const definition = document.createElement('p');
+            definition.classList.add('definition');
+            definition.textContent = wordData.definition;
+
+            const synonymsGroup = createListGroup("Synonyms", wordData.synonyms);
+            const antonymsGroup = createListGroup("Antonyms", wordData.antonyms);
+
+            card.append(utilityBtnContainer, mainWord, wordType, definition, synonymsGroup, antonymsGroup);
+            return card;
+        }
+
+        function createListGroup(title, items) {
+            const group = document.createElement('div');
+            group.classList.add('list-group');
+            const groupTitle = document.createElement('h4');
+            groupTitle.textContent = title;
+            const listItems = document.createElement('div');
+            listItems.classList.add('list-items');
+            items.forEach(item => {
+                const span = document.createElement('span');
+                span.classList.add('list-item');
+                span.textContent = item;
+                listItems.appendChild(span);
+            });
+            group.append(groupTitle, listItems);
+            return group;
+        }
+
+        async function displayNewWords(count = 8) {
+            const newWords = await fetchRandomWords(count);
+            if (newWords.length === 0) {
+                loadMoreBtn.style.display = 'none';
+                contentArea.innerHTML += '<p class="no-more-words">You have seen all the words in this category!</p>';
+                return;
+            }
+
+            newWords.forEach(wordData => {
+                const card = createWordCard(wordData);
+                contentArea.appendChild(card);
+                wordHistory.push(wordData);
+            });
+
+            loadMoreBtn.textContent = 'Load More';
+            loadMoreBtn.disabled = false;
+            updateButtons();
+        }
+
+        function navigate(direction) {
+            const currentCard = contentArea.querySelector(`[data-word="${wordHistory[currentIndex].word}"]`);
+            if (!currentCard) return;
+
+            if (direction === 'back' && currentIndex > 0) {
+                const prevCard = contentArea.querySelector(`[data-word="${wordHistory[currentIndex - 1].word}"]`);
+                if (prevCard) {
+                    prevCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    currentIndex--;
+                }
+            } else if (direction === 'forward' && currentIndex < wordHistory.length - 1) {
+                const nextCard = contentArea.querySelector(`[data-word="${wordHistory[currentIndex + 1].word}"]`);
+                if (nextCard) {
+                    nextCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    currentIndex++;
+                }
+            }
+            updateButtons();
+        }
+
+        function showQuestion(questionData, mainWord) {
+            if (questionData.is_uniben) {
+                questionTitle.textContent = "UNIBEN Post-UTME Question";
+                questionText.textContent = questionData.question;
+                questionOptions.innerHTML = questionData.options.map(opt => `<li>${opt}</li>`).join('');
+            } else {
+                questionTitle.textContent = "Possible Question Guess";
+                questionText.textContent = `Based on the word "${mainWord}", a possible UNIBEN question could test your knowledge of its synonym or antonym, its usage in a sentence, or its word class.`;
+                questionOptions.innerHTML = '';
+            }
+            overlay.classList.add('active');
+        }
+
+        function updateButtons() {
+            backBtn.disabled = currentIndex <= 0;
+            forwardBtn.disabled = currentIndex >= wordHistory.length - 1;
+        }
+
+        function handleTopicChange(event) {
+            document.querySelector('.topic-btn.active')?.classList.remove('active');
+            event.target.classList.add('active');
+            currentTopic = event.target.dataset.topic;
+            wordHistory = [];
+            currentIndex = -1;
+            contentArea.innerHTML = '';
+            loadMoreContainer.style.display = 'block';
+            displayNewWords();
+        }
+
+        async function shareWord(word) {
+            if (navigator.share) {
+                const url = `${window.location.protocol}//${window.location.host}${window.location.pathname}?word=${encodeURIComponent(word)}`;
+                try {
+                    await navigator.share({
+                        title: `Check out this word: ${word}`,
+                        text: `Improve your JAMB vocabulary with this word: ${word}!`,
+                        url: url
+                    });
+                    console.log('Word shared successfully!');
+                } catch (error) {
+                    console.error('Error sharing:', error);
+                }
+            } else {
+                alert('Web Share API is not supported in your browser.');
+            }
+        }
+
+        function handleSharedWord() {
+            const params = new URLSearchParams(window.location.search);
+            const sharedWord = params.get('word');
+
+            if (sharedWord) {
+                const wordData = Object.values(ALL_WORDS).flat().find(w => w.word.toLowerCase() === sharedWord.toLowerCase());
+                if (wordData) {
+                    contentArea.innerHTML = '';
+                    loadMoreContainer.style.display = 'none';
+                    const card = createWordCard(wordData);
+                    contentArea.appendChild(card);
+
+                    const goHomeBtn = document.createElement('button');
+                    goHomeBtn.classList.add('load-more-btn');
+                    goHomeBtn.style.marginTop = '2rem';
+                    goHomeBtn.textContent = 'Go to Home';
+                    goHomeBtn.onclick = () => {
+                        window.location.href = window.location.pathname;
+                    };
+                    contentArea.appendChild(goHomeBtn);
+                }
+            } else {
+                displayNewWords();
+            }
+        }
+
+        function goToPage(page) {
+            contentArea.innerHTML = `
+                <div class="word-card" style="text-align: center; padding: 5rem 2rem;">
+                    <h2>${page.charAt(0).toUpperCase() + page.slice(1).replace(/s$/, '')} Page</h2>
+                    <p style="margin-top: 1rem;">This is a static page for ${page}.</p>
+                </div>
+            `;
+            loadMoreContainer.style.display = 'none';
+            document.querySelector('.app-title').textContent = page.charAt(0).toUpperCase() + page.slice(1).replace(/s$/, '');
+            activateNavBtn(page);
+            if (page === 'policies') {
+                contentArea.innerHTML = getPoliciesContent();
+            } else if (page === 'terms') {
+                contentArea.innerHTML = getTermsOfUseContent();
+            }
+        }
+
+        function goToHome() {
+            document.querySelector('.app-title').textContent = "English Vocabulary 📖";
+            wordHistory = [];
+            currentIndex = -1;
+            contentArea.innerHTML = '';
+            loadMoreContainer.style.display = 'block';
+            displayNewWords();
+            activateNavBtn('home');
+        }
+
+        function activateNavBtn(page) {
+            navButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.page === page) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+        
+        /* Quiz Logic */
+        let currentQuizAnswer = null;
+
+        function startQuiz() {
+            document.querySelector('.app-title').textContent = "Quiz Page";
+            contentArea.innerHTML = '';
+            loadMoreContainer.style.display = 'none';
+            activateNavBtn('quiz');
+            generateNewQuizQuestion();
+        }
+
+        function generateNewQuizQuestion() {
+            const allWords = Object.values(ALL_WORDS).flat();
+            const quizCandidates = allWords.filter(w => w.synonyms.length > 0 || w.antonyms.length > 0);
+            
+            if (quizCandidates.length === 0) {
+                contentArea.innerHTML = `<div class="word-card quiz-container"><h2>No Quiz Questions Available</h2><p>Please check back later for more quiz questions.</p></div>`;
+                return;
+            }
+
+            const questionWord = quizCandidates[Math.floor(Math.random() * quizCandidates.length)];
+            const questionType = Math.random() > 0.5 ? 'synonym' : 'antonym';
+            const correctWordPool = questionType === 'synonym' ? questionWord.synonyms : questionWord.antonyms;
+            
+            if (correctWordPool.length === 0) {
+                generateNewQuizQuestion();
+                return;
+            }
+
+            const correctAnswer = correctWordPool[Math.floor(Math.random() * correctWordPool.length)];
+            
+            const allPossibleOptions = allWords.flatMap(w => [...w.synonyms, ...w.antonyms, w.word]);
+            const distractorOptions = shuffleArray(allPossibleOptions.filter(opt => opt !== correctAnswer && opt !== questionWord.word)).slice(0, 3);
+            
+            const allOptions = shuffleArray([correctAnswer, ...distractorOptions]);
+            
+            currentQuizAnswer = correctAnswer;
+
+            const quizHTML = `
+                <div class="quiz-container">
+                    <h2 class="quiz-question">What is the ${questionType} of **${questionWord.word}**?</h2>
+                    <div class="quiz-options">
+                        ${allOptions.map(opt => `<button class="quiz-option-btn" data-answer="${opt}">${opt.charAt(0).toUpperCase() + opt.slice(1)}</button>`).join('')}
+                    </div>
+                </div>
+            `;
+            
+            contentArea.innerHTML = quizHTML;
+            document.querySelectorAll('.quiz-option-btn').forEach(button => {
+                button.addEventListener('click', handleQuizAnswer);
+            });
+        }
+        
+        function handleQuizAnswer(event) {
+            const selectedAnswer = event.target.dataset.answer;
+            const buttons = document.querySelectorAll('.quiz-option-btn');
+            
+            buttons.forEach(button => {
+                button.disabled = true;
+                if (button.dataset.answer === currentQuizAnswer) {
+                    button.classList.add('correct');
+                } else if (button.dataset.answer === selectedAnswer) {
+                    button.classList.add('incorrect');
+                }
+            });
+            
+            const nextBtn = document.createElement('button');
+            nextBtn.classList.add('load-more-btn');
+            nextBtn.textContent = 'Next Question';
+            nextBtn.style.marginTop = '1rem';
+            nextBtn.addEventListener('click', generateNewQuizQuestion);
+            
+            document.querySelector('.quiz-container').appendChild(nextBtn);
+        }
+
+        function getTermsOfUseContent() {
+            return `
+                <div class="word-card" style="text-align: left; padding: 2rem;">
+                    <h2>Terms of Use</h2>
+                    <p style="margin-top: 1rem; line-height: 1.6;">
+                        Welcome to our Vocabulary App. These Terms of Use ("Terms") govern your use of our application and services. By accessing or using our app, you agree to be bound by these Terms and our Privacy Policy. If you do not agree to these Terms, please do not use our app.
+                    </p>
+                    
+                    <h3>1. Acceptance of Terms</h3>
+                    <p style="line-height: 1.6;">
+                        By creating an account, or by using the app, you acknowledge that you have read, understood, and agree to be bound by these Terms. We reserve the right, at our sole discretion, to modify or replace these Terms at any time. We will notify you of any changes by posting the new Terms on this page. Your continued use of the app after any such changes constitutes your acceptance of the new Terms.
+                    </p>
+
+                    <h3>2. Use of the App</h3>
+                    <p style="line-height: 1.6;">
+                        Our app provides educational content, including vocabulary words, definitions, synonyms, antonyms, and quizzes. The content is for informational and educational purposes only. While we strive for accuracy, we do not guarantee the completeness, accuracy, or reliability of any information provided. You agree to use the app for its intended purpose and in compliance with all applicable laws and regulations.
+                    </p>
+
+                    <h3>3. Prohibited Conduct</h3>
+                    <p style="line-height: 1.6;">
+                        You agree not to engage in the following prohibited activities:
+                        <ul>
+                            <li>Reproducing, duplicating, copying, selling, reselling, or exploiting any portion of the app without our express written permission.</li>
+                            <li>Attempting to interfere with, compromise the system integrity or security, or decipher any transmissions to or from the servers running the app.</li>
+                            <li>Engaging in any automated use of the system, such as using scripts to send comments or messages, or using any data mining, robots, or similar data gathering and extraction tools.</li>
+                            <li>Uploading or transmitting viruses, worms, or any other type of malicious code that will or may be used in any way that will affect the functionality or operation of the app.</li>
+                            <li>Collecting or harvesting any personally identifiable information, including account names, from the app.</li>
+                        </ul>
+                    </p>
+
+                    <h3>4. Intellectual Property Rights</h3>
+                    <p style="line-height: 1.6;">
+                        All content on the app, including text, graphics, logos, and software, is the property of our company or its content suppliers and is protected by intellectual property laws. You may not use any of this content without our prior written permission.
+                    </p>
+
+                    <h3>5. Disclaimer of Warranties</h3>
+                    <p style="line-height: 1.6;">
+                        The app is provided on an "as is" and "as available" basis. We make no warranties, expressed or implied, regarding the operation of the app or the information, content, or materials included therein. To the full extent permissible by law, we disclaim all warranties, express or implied, including, but not limited to, implied warranties of merchantability and fitness for a particular purpose.
+                    </p>
+
+                    <h3>6. Limitation of Liability</h3>
+                    <p style="line-height: 1.6;">
+                        In no event shall our company, nor its directors, employees, partners, agents, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from (i) your access to or use of or inability to access or use the app; (ii) any conduct or content of any third party on the app; (iii) any content obtained from the app; and (iv) unauthorized access, use or alteration of your transmissions or content, whether based on warranty, contract, tort (including negligence) or any other legal theory, whether or not we have been informed of the possibility of such damage.
+                    </p>
+                    
+                    <h3>7. Governing Law</h3>
+                    <p style="line-height: 1.6;">
+                        These Terms shall be governed and construed in accordance with the laws of Nigeria, without regard to its conflict of law provisions. Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights.
+                    </p>
+
+                    <h3>8. Contact Information</h3>
+                    <p style="line-height: 1.6;">
+                        If you have any questions about these Terms, please contact us. buddyzzone001@gmail.com
+                    </p>
+                </div>
+            `;
+        }
+
+        function getPoliciesContent() {
+            return `
+                <div class="word-card" style="text-align: left; padding: 2rem;">
+                    <h2>Privacy Policy</h2>
+                    <p style="margin-top: 1rem; line-height: 1.6;">
+                        Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your information when you use our Vocabulary App.
+                    </p>
+
+                    <h3>1. Information We Collect</h3>
+                    <p style="line-height: 1.6;">
+                        We do not require you to provide any personally identifiable information to use our app.
+                    </p>
+
+                    <h3>2. Use of Data</h3>
+                    <p style="line-height: 1.6;">
+                        The data we collect is used solely to:
+                        <ul>
+                            <li>Provide and maintain the app.</li>
+                            <li>Monitor the usage of the app.</li>
+                            <li>Detect, prevent, and address technical issues.</li>
+                            <li>Improve and customize the user experience.</li>
+                        </ul>
+                    </p>
+                    
+                    <h3>3. Data Security</h3>
+                    <p style="line-height: 1.6;">
+                        The security of your data is paramount. We implement a variety of security measures to maintain the safety of your personal information when you use the app. However, please note that no method of transmission over the internet or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your information, we cannot guarantee its absolute security.
+                    </p>
+
+                    <h3>4. Children's Privacy</h3>
+                    <p style="line-height: 1.6;">
+                        Our app is not intended for use by children under the age of 13. We do not knowingly collect personally identifiable information from children under 13. If you are a parent or guardian and you are aware that your child has provided us with personal data, please contact us buddyzzone001@gmail.com. If we become aware that we have collected personal data from children without verification of parental consent, we will take steps to remove that information from our servers.
+                    </p>
+
+                    <h3>5. Changes to This Privacy Policy</h3>
+                    <p style="line-height: 1.6;">
+                        We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. Changes to this Privacy Policy are effective when they are posted on this page. We advise you to review this Privacy Policy periodically for any changes.
+                    </p>
+
+                    <h3>6. Contact Us</h3>
+                    <p style="line-height: 1.6;">
+                        If you have any questions about this Privacy Policy, please contact us. buddyzzone001@gmail.com
+                    </p>
+                </div>
+            `;
+        }
+
+        loadMoreBtn.addEventListener('click', () => displayNewWords(5));
+        backBtn.addEventListener('click', () => navigate('back'));
+        forwardBtn.addEventListener('click', () => navigate('forward'));
+        refreshBtn.addEventListener('click', () => {
+            wordHistory = [];
+            currentIndex = -1;
+            contentArea.innerHTML = '';
+            loadMoreContainer.style.display = 'block';
+            handleSharedWord();
+        });
+        closeOverlayBtn.addEventListener('click', () => overlay.classList.remove('active'));
+        topicButtons.forEach(btn => btn.addEventListener('click', handleTopicChange));
+        
+        window.onload = () => {
+            handleSharedWord();
+        };
+
+        contentArea.addEventListener('scroll', () => {
+            const cards = Array.from(contentArea.querySelectorAll('.word-card'));
+            let currentCardIndex = cards.findIndex(card => {
+                const rect = card.getBoundingClientRect();
+                return rect.top >= 0 && rect.top <= window.innerHeight / 2;
+            });
+            if (currentCardIndex !== -1 && currentIndex !== currentCardIndex) {
+                currentIndex = currentCardIndex;
+                updateButtons();
+            }
+        });
+    </script>
+</body>
+
+</html>
